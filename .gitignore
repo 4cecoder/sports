@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# drizzle
+drizzle/*.sql
+!drizzle/0000_init.sql

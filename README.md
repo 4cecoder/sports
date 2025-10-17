@@ -1,109 +1,307 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# Fastbreak Event Dashboard
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
-
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+A full-stack Sports Event Management application built with Next.js 15, Supabase, Drizzle ORM, and Shadcn UI. Create, view, and manage sports events with comprehensive venue information.
 
 ## Features
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Middleware
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Password-based authentication block installed via the [Supabase UI Library](https://supabase.com/ui/docs/nextjs/password-based-auth)
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+- **Authentication** - Email/password and Google OAuth with Supabase Auth
+- **Event Management** - Full CRUD operations for sports events
+- **Multi-Venue Support** - Add multiple venues per event
+- **Search & Filter** - Real-time search and sport type filtering
+- **Type-Safe Actions** - Server actions with Zod validation and consistent error handling
+- **Responsive Design** - Mobile-first UI with Tailwind CSS
+- **Toast Notifications** - User feedback with Sonner
+- **Protected Routes** - Automatic authentication redirects
+- **Database Migrations** - Drizzle ORM with SQL migrations
+- **Git Hooks** - Husky pre-commit linting
 
-## Demo
+## Tech Stack
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Database**: Supabase (PostgreSQL)
+- **ORM**: Drizzle ORM
+- **Authentication**: Supabase Auth
+- **Styling**: Tailwind CSS
+- **UI Components**: Shadcn/ui
+- **Form Validation**: React Hook Form + Zod
+- **Deployment**: Vercel
 
-## Deploy to Vercel
+## Getting Started
 
-Vercel deployment will guide you through creating a Supabase account and project.
+### Prerequisites
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+- Node.js 18+ and npm
+- A [Supabase](https://supabase.com) account
+- (Optional) Google OAuth credentials for social login
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+### 1. Clone the Repository
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+```bash
+git clone https://github.com/4cecoder/sports.git
+cd sports
+```
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+### 2. Install Dependencies
 
-## Clone and run locally
+```bash
+npm install
+```
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+### 3. Set Up Supabase
 
-2. Create a Next.js app using the Supabase Starter template npx command
+1. Create a new project at [database.new](https://database.new)
+2. Go to Project Settings > API to find your credentials
+3. Go to Project Settings > Database > Connection String to get your DATABASE_URL
 
-   ```bash
-   npx create-next-app --example with-supabase with-supabase-app
-   ```
+### 4. Configure Environment Variables
 
-   ```bash
-   yarn create next-app --example with-supabase with-supabase-app
-   ```
+Copy the example environment file and fill in your Supabase credentials:
 
-   ```bash
-   pnpm create next-app --example with-supabase with-supabase-app
-   ```
+```bash
+cp .env.example .env.local
+```
 
-3. Use `cd` to change into the app's directory
+Update `.env.local` with your Supabase credentials:
 
-   ```bash
-   cd with-supabase-app
-   ```
+```env
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-supabase-publishable-key
 
-4. Rename `.env.example` to `.env.local` and update the following:
+# Database URL for Drizzle ORM
+DATABASE_URL=your-supabase-database-url
 
-  ```env
-  NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=[INSERT SUPABASE PROJECT API PUBLISHABLE OR ANON KEY]
-  ```
-  > [!NOTE]
-  > This example uses `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, which refers to Supabase's new **publishable** key format.
-  > Both legacy **anon** keys and new **publishable** keys can be used with this variable name during the transition period. Supabase's dashboard may show `NEXT_PUBLIC_SUPABASE_ANON_KEY`; its value can be used in this example.
-  > See the [full announcement](https://github.com/orgs/supabase/discussions/29260) for more information.
+# Optional: Google OAuth
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+```
 
-  Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` can be found in [your Supabase project's API settings](https://supabase.com/dashboard/project/_?showConnect=true)
+### 5. Run Database Migrations
 
-5. You can now run the Next.js local development server:
+Execute the SQL migration in your Supabase SQL Editor:
 
-   ```bash
-   npm run dev
-   ```
+1. Go to your Supabase Dashboard > SQL Editor
+2. Copy the contents of `drizzle/0000_init.sql`
+3. Paste and run the SQL
 
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
+This will create:
+- `events` table for storing sports events
+- `venues` table for event locations
+- Proper indexes for performance
+- Row Level Security (RLS) policies
 
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
+### 6. (Optional) Set Up Google OAuth
 
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select existing
+3. Enable Google+ API
+4. Create OAuth 2.0 credentials
+5. Add authorized redirect URIs:
+   - `https://your-project-ref.supabase.co/auth/v1/callback`
+   - `http://localhost:3000/auth/callback` (for development)
+6. Add credentials to Supabase:
+   - Go to Authentication > Providers > Google
+   - Enable and add Client ID and Secret
 
-## Feedback and issues
+### 7. Initialize Husky
 
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
+```bash
+npm run prepare
+```
 
-## More Supabase examples
+### 8. Start Development Server
 
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Project Structure
+
+```
+sports/
+├── app/                      # Next.js App Router
+│   ├── auth/                 # Authentication pages
+│   ├── dashboard/            # Main dashboard
+│   └── layout.tsx            # Root layout with providers
+├── components/               # React components
+│   ├── events/               # Event-specific components
+│   │   ├── event-card.tsx
+│   │   ├── event-form-dialog.tsx
+│   │   └── delete-event-dialog.tsx
+│   └── ui/                   # Shadcn UI components
+├── lib/                      # Utilities and configurations
+│   ├── actions/              # Server actions
+│   │   ├── action-helpers.ts # Type-safe action utilities
+│   │   └── event-actions.ts  # Event CRUD operations
+│   ├── db/                   # Database configuration
+│   │   ├── index.ts          # Drizzle instance
+│   │   └── schema.ts         # Database schema
+│   └── supabase/             # Supabase clients
+├── drizzle/                  # Database migrations
+└── .husky/                   # Git hooks
+```
+
+## Key Features Explained
+
+### Type-Safe Server Actions
+
+All server actions use a generic helper that provides:
+- Automatic Zod validation
+- Consistent error handling
+- Type safety end-to-end
+
+```typescript
+// Example usage
+const result = await createEvent({
+  name: "Championship Game",
+  sportType: "Basketball",
+  // ...
+});
+
+if (result.success) {
+  // result.data is type-safe
+} else {
+  // result.error contains the error message
+}
+```
+
+### Database Schema
+
+**Events Table:**
+- `id` - UUID primary key
+- `name` - Event name
+- `sport_type` - Type of sport
+- `date` - Event date and time
+- `description` - Optional description
+- `user_id` - Owner (references auth.users)
+- Timestamps for created/updated
+
+**Venues Table:**
+- `id` - UUID primary key
+- `event_id` - Foreign key to events (cascade delete)
+- `name` - Venue name
+- `address`, `city`, `state`, `country` - Location details
+
+### Row Level Security
+
+The database uses RLS policies to ensure:
+- Users can only view/edit/delete their own events
+- Venues are only accessible through their parent events
+- All operations are automatically scoped to the authenticated user
+
+## Available Scripts
+
+```bash
+npm run dev          # Start development server with Turbopack
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+
+npm run db:generate  # Generate Drizzle migrations
+npm run db:push      # Push schema to database
+npm run db:studio    # Open Drizzle Studio
+
+npm run prepare      # Install Husky git hooks
+```
+
+## Deployment
+
+### Deploy to Vercel
+
+1. Push your code to GitHub
+2. Import project to [Vercel](https://vercel.com)
+3. Vercel will auto-detect Next.js
+4. Add environment variables in Vercel project settings
+5. Deploy
+
+### Environment Variables on Vercel
+
+Add these in your Vercel project settings:
+
+```
+NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+DATABASE_URL
+NEXT_PUBLIC_GOOGLE_CLIENT_ID (optional)
+GOOGLE_CLIENT_SECRET (optional)
+```
+
+### Post-Deployment
+
+1. Update Google OAuth redirect URIs with your Vercel domain
+2. Update Supabase redirect URIs in Authentication settings
+
+## Development Notes
+
+### Actions vs API Routes
+
+This project uses Server Actions exclusively for data mutations, following Next.js best practices:
+- ✅ Type-safe with TypeScript
+- ✅ Automatic revalidation
+- ✅ Better DX with co-location
+- ✅ Simplified error handling
+
+### Form Validation
+
+All forms use:
+- React Hook Form for form state management
+- Zod for runtime validation
+- Shadcn Form component for consistent UI
+
+### Authentication Flow
+
+1. User signs up/logs in via Supabase Auth
+2. Session is stored in cookies (works across entire app)
+3. Middleware protects routes automatically
+4. Server Actions verify authentication before mutations
+
+## Troubleshooting
+
+### "Unauthorized" errors
+
+- Check that your `.env.local` file has correct Supabase credentials
+- Ensure you're logged in (check Network tab for auth cookies)
+- Verify RLS policies are created in Supabase
+
+### Database connection errors
+
+- Verify DATABASE_URL is correct (should include password)
+- Check Supabase project is not paused
+- Ensure IP restrictions allow your connection
+
+### Build errors
+
+```bash
+# Clear Next.js cache
+rm -rf .next
+
+# Reinstall dependencies
+rm -rf node_modules package-lock.json
+npm install
+
+# Try building again
+npm run build
+```
+
+## Contributing
+
+This project was built as a coding challenge. Feel free to fork and extend!
+
+## License
+
+MIT
+
+## Acknowledgments
+
+- [Next.js](https://nextjs.org/)
+- [Supabase](https://supabase.com/)
+- [Shadcn/ui](https://ui.shadcn.com/)
+- [Drizzle ORM](https://orm.drizzle.team/)
+- [Vercel](https://vercel.com/)
+
+---
+
+Built with ❤️ for Fastbreak Sports Event Management Challenge
