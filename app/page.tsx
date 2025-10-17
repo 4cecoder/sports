@@ -157,6 +157,46 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Trusted By Section - Logo Carousel */}
+        <div className="border-b bg-muted/10">
+          <div className="container mx-auto px-4 py-12">
+            <div className="text-center mb-8">
+              <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">
+                Trusted by leagues and organizations
+              </p>
+            </div>
+            <div className="relative overflow-hidden">
+              <div className="flex gap-12 animate-scroll-left">
+                {/* Duplicate the logos for seamless loop */}
+                {[...Array(2)].map((_, setIndex) => (
+                  <div key={setIndex} className="flex gap-12 items-center justify-around min-w-full">
+                    <div className="flex items-center justify-center px-8 py-4 bg-background/50 rounded-lg min-w-[150px]">
+                      <Trophy className="h-8 w-8 text-primary" />
+                      <span className="ml-2 font-bold text-lg">League Pro</span>
+                    </div>
+                    <div className="flex items-center justify-center px-8 py-4 bg-background/50 rounded-lg min-w-[150px]">
+                      <Users className="h-8 w-8 text-accent" />
+                      <span className="ml-2 font-bold text-lg">TeamSync</span>
+                    </div>
+                    <div className="flex items-center justify-center px-8 py-4 bg-background/50 rounded-lg min-w-[150px]">
+                      <Calendar className="h-8 w-8 text-primary" />
+                      <span className="ml-2 font-bold text-lg">EventHub</span>
+                    </div>
+                    <div className="flex items-center justify-center px-8 py-4 bg-background/50 rounded-lg min-w-[150px]">
+                      <Sparkles className="h-8 w-8 text-accent" />
+                      <span className="ml-2 font-bold text-lg">SportsTech</span>
+                    </div>
+                    <div className="flex items-center justify-center px-8 py-4 bg-background/50 rounded-lg min-w-[150px]">
+                      <Zap className="h-8 w-8 text-primary" />
+                      <span className="ml-2 font-bold text-lg">FastPlay</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Features Section */}
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mx-auto max-w-6xl">
@@ -198,6 +238,110 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Product Cards Section - 50/50 Split Layout */}
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center space-y-4 mb-16">
+              <h2 className="text-3xl font-bold md:text-4xl">
+                Choose Your Platform
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Purpose-built solutions for every role in sports event management
+              </p>
+            </div>
+
+            <div className="space-y-12">
+              {/* Amateur/League Organizer Card */}
+              <Card className="overflow-hidden border-border/50 hover:border-primary/50 transition-all glow-hover">
+                <div className="grid md:grid-cols-2 gap-0">
+                  <div className="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
+                    <div className="space-y-4">
+                      <div className="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-semibold">
+                        FOR ORGANIZERS
+                      </div>
+                      <h3 className="text-3xl font-bold">Amateur & League Management</h3>
+                      <p className="text-lg text-muted-foreground">
+                        Everything you need to run local leagues, tournaments, and community events.
+                        Schedule games, manage venues, and keep your league organized.
+                      </p>
+                      <ul className="space-y-3 text-muted-foreground">
+                        <li className="flex items-start gap-2">
+                          <Calendar className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <span>Automated scheduling and conflict detection</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <span>Multi-venue coordination and management</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <Users className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <span>Team rosters and player tracking</span>
+                        </li>
+                      </ul>
+                      <Button className="gradient-blue-green hover:opacity-90 w-full md:w-auto mt-4">
+                        Get Started Free
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="relative h-64 md:h-auto image-zoom-subtle order-1 md:order-2">
+                    <Image
+                      src="/images/sports/basketball.jpg"
+                      alt="League management"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-background/80 md:from-background/40 to-transparent" />
+                  </div>
+                </div>
+              </Card>
+
+              {/* Professional/Brand Card */}
+              <Card className="overflow-hidden border-border/50 hover:border-accent/50 transition-all glow-hover">
+                <div className="grid md:grid-cols-2 gap-0">
+                  <div className="relative h-64 md:h-auto image-zoom-subtle">
+                    <Image
+                      src="/images/sports/football.jpg"
+                      alt="Professional sports management"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-l from-background/80 md:from-background/40 to-transparent" />
+                  </div>
+                  <div className="p-8 md:p-12 flex flex-col justify-center">
+                    <div className="space-y-4">
+                      <div className="inline-block px-4 py-1 bg-accent/10 text-accent rounded-full text-sm font-semibold">
+                        FOR PROFESSIONALS
+                      </div>
+                      <h3 className="text-3xl font-bold">Professional & Brand Solutions</h3>
+                      <p className="text-lg text-muted-foreground">
+                        Enterprise-grade tools for professional leagues, teams, and brand activations.
+                        Import official events from ESPN and manage at scale.
+                      </p>
+                      <ul className="space-y-3 text-muted-foreground">
+                        <li className="flex items-start gap-2">
+                          <Sparkles className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                          <span>Live ESPN event integration (NBA, NFL, MLB, NHL)</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <Trophy className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                          <span>Advanced analytics and reporting</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <Shield className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                          <span>Enterprise security and compliance</span>
+                        </li>
+                      </ul>
+                      <Button className="gradient-blue-green hover:opacity-90 w-full md:w-auto mt-4">
+                        Contact Sales
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+
         {/* Sports Showcase Section */}
         <div className="border-y bg-muted/20">
           <div className="container mx-auto px-4 py-16 md:py-24">
@@ -213,50 +357,143 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="relative aspect-square rounded-xl overflow-hidden group">
+                <div className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer image-scale-hover">
                   <Image
                     src="/images/sports/basketball.jpg"
                     alt="Basketball"
                     fill
-                    className="object-cover transition-transform group-hover:scale-110"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
-                    <span className="text-white font-bold text-xl">🏀 Basketball</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 flex items-end p-4 transition-all group-hover:from-black/95 group-hover:via-black/60">
+                    <span className="text-white font-bold text-xl">Basketball</span>
                   </div>
                 </div>
-                <div className="relative aspect-square rounded-xl overflow-hidden group">
+                <div className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer image-scale-hover">
                   <Image
                     src="/images/sports/football.jpg"
                     alt="Football"
                     fill
-                    className="object-cover transition-transform group-hover:scale-110"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
-                    <span className="text-white font-bold text-xl">🏈 Football</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 flex items-end p-4 transition-all group-hover:from-black/95 group-hover:via-black/60">
+                    <span className="text-white font-bold text-xl">Football</span>
                   </div>
                 </div>
-                <div className="relative aspect-square rounded-xl overflow-hidden group">
+                <div className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer image-scale-hover">
                   <Image
                     src="/images/sports/baseball.jpg"
                     alt="Baseball"
                     fill
-                    className="object-cover transition-transform group-hover:scale-110"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
-                    <span className="text-white font-bold text-xl">⚾ Baseball</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 flex items-end p-4 transition-all group-hover:from-black/95 group-hover:via-black/60">
+                    <span className="text-white font-bold text-xl">Baseball</span>
                   </div>
                 </div>
-                <div className="relative aspect-square rounded-xl overflow-hidden group">
+                <div className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer image-scale-hover">
                   <Image
                     src="/images/sports/hockey.jpg"
                     alt="Hockey"
                     fill
-                    className="object-cover transition-transform group-hover:scale-110"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
-                    <span className="text-white font-bold text-xl">🏒 Hockey</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 flex items-end p-4 transition-all group-hover:from-black/95 group-hover:via-black/60">
+                    <span className="text-white font-bold text-xl">Hockey</span>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Testimonials Section */}
+        <div className="border-y bg-muted/10">
+          <div className="container mx-auto px-4 py-16 md:py-24">
+            <div className="mx-auto max-w-6xl">
+              <div className="text-center space-y-4 mb-12">
+                <h2 className="text-3xl font-bold md:text-4xl">
+                  Loved by Event Organizers
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  See what leagues and organizations are saying about our platform
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-8">
+                <Card className="border-border/50 hover:border-primary/50 transition-all glow-hover">
+                  <CardContent className="p-8 space-y-4">
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="text-primary text-xl">★</span>
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground italic">
+                      &ldquo;This platform completely transformed how we manage our youth basketball league.
+                      Scheduling conflicts are a thing of the past!&rdquo;
+                    </p>
+                    <div className="pt-4 border-t border-border/50">
+                      <div className="flex items-center gap-3">
+                        <div className="rounded-full bg-primary/10 w-10 h-10 flex items-center justify-center">
+                          <Trophy className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-semibold">Sarah Johnson</p>
+                          <p className="text-sm text-muted-foreground">Metro Basketball League</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-border/50 hover:border-accent/50 transition-all glow-hover">
+                  <CardContent className="p-8 space-y-4">
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="text-accent text-xl">★</span>
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground italic">
+                      &ldquo;The ESPN integration is a game-changer. We can sync official games
+                      and manage our brand activations all in one place.&rdquo;
+                    </p>
+                    <div className="pt-4 border-t border-border/50">
+                      <div className="flex items-center gap-3">
+                        <div className="rounded-full bg-accent/10 w-10 h-10 flex items-center justify-center">
+                          <Sparkles className="h-5 w-5 text-accent" />
+                        </div>
+                        <div>
+                          <p className="font-semibold">Mike Chen</p>
+                          <p className="text-sm text-muted-foreground">ProSports Marketing</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-border/50 hover:border-primary/50 transition-all glow-hover">
+                  <CardContent className="p-8 space-y-4">
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="text-primary text-xl">★</span>
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground italic">
+                      &ldquo;Managing tournaments across multiple venues used to be a nightmare.
+                      This tool makes it effortless and professional.&rdquo;
+                    </p>
+                    <div className="pt-4 border-t border-border/50">
+                      <div className="flex items-center gap-3">
+                        <div className="rounded-full bg-primary/10 w-10 h-10 flex items-center justify-center">
+                          <Users className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-semibold">Lisa Martinez</p>
+                          <p className="text-sm text-muted-foreground">Regional Soccer Association</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>

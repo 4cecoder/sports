@@ -123,4 +123,48 @@
       background-position: 0% 50%;
     }
   }
+
+  /* Fastbreak-inspired image hover effects */
+  .image-scale-hover {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .image-scale-hover img {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .image-scale-hover:hover img {
+    transform: scale(1.6);
+  }
+
+  .image-zoom-subtle {
+    overflow: hidden;
+  }
+
+  .image-zoom-subtle img {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .image-zoom-subtle:hover img {
+    transform: scale(1.1);
+  }
+
+  /* Carousel animations */
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll-left {
+    animation: scroll-left 30s linear infinite;
+  }
+
+  .animate-scroll-left:hover {
+    animation-play-state: paused;
+  }
 }
