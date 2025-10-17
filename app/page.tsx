@@ -83,7 +83,7 @@ export default function Home() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://images.pexels.com/photos/1040157/pexels-photo-1040157.jpeg?auto=compress&cs=tinysrgb&w=1920"
+              src="/images/sports/hero-bg.jpg"
               alt="Sports stadium background"
               fill
               className="object-cover opacity-10 dark:opacity-5"
@@ -212,7 +212,7 @@ export default function Home() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="relative aspect-square rounded-xl overflow-hidden group">
                   <Image
-                    src="https://images.pexels.com/photos/1752757/pexels-photo-1752757.jpeg?auto=compress&cs=tinysrgb&w=500"
+                    src="/images/sports/basketball.jpg"
                     alt="Basketball"
                     fill
                     className="object-cover transition-transform group-hover:scale-110"
@@ -223,7 +223,7 @@ export default function Home() {
                 </div>
                 <div className="relative aspect-square rounded-xl overflow-hidden group">
                   <Image
-                    src="https://images.pexels.com/photos/1618200/pexels-photo-1618200.jpeg?auto=compress&cs=tinysrgb&w=500"
+                    src="/images/sports/football.jpg"
                     alt="Football"
                     fill
                     className="object-cover transition-transform group-hover:scale-110"
@@ -234,7 +234,7 @@ export default function Home() {
                 </div>
                 <div className="relative aspect-square rounded-xl overflow-hidden group">
                   <Image
-                    src="https://images.pexels.com/photos/1661950/pexels-photo-1661950.jpeg?auto=compress&cs=tinysrgb&w=500"
+                    src="/images/sports/baseball.jpg"
                     alt="Baseball"
                     fill
                     className="object-cover transition-transform group-hover:scale-110"
@@ -245,7 +245,7 @@ export default function Home() {
                 </div>
                 <div className="relative aspect-square rounded-xl overflow-hidden group">
                   <Image
-                    src="https://images.pexels.com/photos/20025288/pexels-photo-20025288.jpeg?auto=compress&cs=tinysrgb&w=500"
+                    src="/images/sports/hockey.jpg"
                     alt="Hockey"
                     fill
                     className="object-cover transition-transform group-hover:scale-110"
@@ -264,7 +264,7 @@ export default function Home() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://images.pexels.com/photos/3628100/pexels-photo-3628100.jpeg?auto=compress&cs=tinysrgb&w=1920"
+              src="/images/sports/cta-bg.jpg"
               alt="Sports action background"
               fill
               className="object-cover opacity-10 dark:opacity-5"
