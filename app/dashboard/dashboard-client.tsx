@@ -10,6 +10,7 @@ import { Plus, Search, LogOut, Compass } from 'lucide-react';
 import { EventCard } from '@/components/events/event-card';
 import { EventListItem } from '@/components/events/event-list-item';
 import { EventFormDialog } from '@/components/events/event-form-dialog';
+import { ExportCalendarDialog } from '@/components/events/export-calendar-dialog';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { ViewSwitcher } from '@/components/view-switcher';
 import { useViewPreference } from '@/hooks/use-view-preference';
@@ -122,8 +123,9 @@ export function DashboardClient({
                   <span className="hidden md:inline">Filter</span>
                 </Button>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <ViewSwitcher view={view} onViewChange={setView} />
+                <ExportCalendarDialog />
                 <Button
                   onClick={() => setIsCreateOpen(true)}
                   className="gradient-blue-green hover:opacity-90 transition-opacity"

@@ -6,9 +6,11 @@ import { type EventWithVenues } from '@/lib/actions/event-actions';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, MapPin, Edit, Trash2, ExternalLink } from 'lucide-react';
+import { Calendar, MapPin, Edit, Trash2, ExternalLink, Download } from 'lucide-react';
 import { EventFormDialog } from './event-form-dialog';
 import { DeleteEventDialog } from './delete-event-dialog';
+import { exportSingleEvent } from '@/lib/actions/calendar-export';
+import { toast } from 'sonner';
 
 interface EventCardProps {
   event: EventWithVenues;
@@ -17,6 +19,37 @@ interface EventCardProps {
 export function EventCard({ event }: EventCardProps) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleExportSingle = async () => {
+    setIsExporting(true);
+    try {
+      const result = await exportSingleEvent(event.id);
+
+      if (result.success) {
+        const blob = new Blob([result.data.icsContent], {
+          type: 'text/calendar;charset=utf-8',
+        });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${event.name.toLowerCase().replace(/\s+/g, '-')}.ics`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        toast.success('Event exported to calendar');
+      } else {
+        toast.error(result.error);
+      }
+    } catch (error) {
+      console.error('Export error:', error);
+      toast.error('Failed to export event');
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   return (
     <>
@@ -85,6 +118,16 @@ export function EventCard({ event }: EventCardProps) {
           </div>
         </CardContent>
         <CardFooter className="flex gap-2 border-t border-border/50 bg-muted/20 pt-4">
+          <Button
+            variant="outline"
+            size="sm"
+            className="hover:bg-accent hover:text-accent-foreground hover:border-accent transition-all"
+            onClick={handleExportSingle}
+            disabled={isExporting}
+            title="Export to calendar"
+          >
+            <Download className="h-4 w-4" />
+          </Button>
           <Button
             variant="outline"
             size="sm"
