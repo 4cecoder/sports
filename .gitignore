@@ -45,3 +45,4 @@ next-env.d.ts
 drizzle/*.sql
 !drizzle/0000_init.sql
 .env.vercel
+build.log
