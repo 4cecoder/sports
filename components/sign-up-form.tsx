@@ -65,7 +65,7 @@ export function SignUpForm({
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 via-orange-500 to-red-600 shadow-2xl shadow-purple-500/50 mb-4">
           <Sparkles className="w-10 h-10 text-white" />
         </div>
-        <h1 className="text-5xl font-display font-bold bg-gradient-to-r from-purple-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
+        <h1 className="text-5xl font-display font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
           Fastbreak
         </h1>
         <p className="text-lg text-white/90 font-medium">

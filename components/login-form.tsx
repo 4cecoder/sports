@@ -55,7 +55,7 @@ export function LoginForm({
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 shadow-2xl shadow-orange-500/50 mb-4">
           <Trophy className="w-10 h-10 text-white" />
         </div>
-        <h1 className="text-5xl font-display font-bold bg-gradient-to-r from-orange-500 via-red-500 to-purple-600 bg-clip-text text-transparent">
+        <h1 className="text-5xl font-display font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
           Fastbreak
         </h1>
         <p className="text-lg text-white/90 font-medium">
