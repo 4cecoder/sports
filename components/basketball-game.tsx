@@ -187,14 +187,8 @@ export function BasketballGame() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    const distance = Math.sqrt(
-      Math.pow(x - ballPosition.x, 2) + Math.pow(y - ballPosition.y, 2)
-    );
-
-    if (distance < BALL_RADIUS + 10) {
-      setIsDragging(true);
-      setDragStart({ x, y });
-    }
+    setIsDragging(true);
+    setDragStart({ x, y });
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -213,8 +207,9 @@ export function BasketballGame() {
   const handleMouseUp = () => {
     if (!isDragging) return;
 
-    const velocityX = (ballPosition.x - dragStart.x) / 10;
-    const velocityY = (ballPosition.y - dragStart.y) / 10;
+    // Calculate velocity with better scaling for easier shots
+    const velocityX = (ballPosition.x - dragStart.x) / 8;
+    const velocityY = (ballPosition.y - dragStart.y) / 8;
 
     setBallVelocity({ x: velocityX, y: velocityY });
     setIsDragging(false);
@@ -259,7 +254,7 @@ export function BasketballGame() {
           onMouseLeave={() => setIsDragging(false)}
         />
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm">
-          {isDragging ? '🎯 Aim and release!' : '🏀 Click and drag ball to shoot!'}
+          {isDragging ? '🎯 Release to shoot!' : '🏀 Click and drag anywhere to aim and shoot!'}
         </div>
       </div>
 
