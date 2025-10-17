@@ -13,7 +13,7 @@ export function BasketballGame() {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [isShot, setIsShot] = useState(false);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | null>(null);
 
   const HOOP_X = 300;
   const HOOP_Y = 100;
