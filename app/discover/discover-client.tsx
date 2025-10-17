@@ -67,6 +67,24 @@ const sports = [
     hoverGradient: 'hover:from-purple-600 hover:to-pink-700',
     bgGradient: 'bg-gradient-to-br from-purple-500/10 to-pink-600/10',
   },
+  {
+    id: 'tennis' as SportType,
+    name: 'Tennis',
+    fullName: 'ATP Tennis Tour',
+    emoji: '🎾',
+    gradient: 'from-yellow-500 to-amber-600',
+    hoverGradient: 'hover:from-yellow-600 hover:to-amber-700',
+    bgGradient: 'bg-gradient-to-br from-yellow-500/10 to-amber-600/10',
+  },
+  {
+    id: 'golf' as SportType,
+    name: 'Golf',
+    fullName: 'PGA Tour',
+    emoji: '⛳',
+    gradient: 'from-teal-500 to-green-600',
+    hoverGradient: 'hover:from-teal-600 hover:to-green-700',
+    bgGradient: 'bg-gradient-to-br from-teal-500/10 to-green-600/10',
+  },
 ];
 
 interface ESPNEvent {
@@ -424,6 +442,12 @@ export default function DiscoverClient() {
                 </div>
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-2xl animate-bounce [animation-delay:400ms]">
                   ⚽
+                </div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center text-2xl animate-bounce [animation-delay:500ms]">
+                  🎾
+                </div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500 to-green-600 flex items-center justify-center text-2xl animate-bounce [animation-delay:600ms]">
+                  ⛳
                 </div>
               </div>
               <Trophy className="mx-auto h-12 w-12 text-muted-foreground/50" />
