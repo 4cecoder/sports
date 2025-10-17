@@ -27,13 +27,14 @@ interface ESPNResponse {
   events: ESPNEvent[];
 }
 
-export type SportType = 'nba' | 'nfl' | 'mlb' | 'nhl';
+export type SportType = 'nba' | 'nfl' | 'mlb' | 'nhl' | 'mls';
 
 const sportPaths: Record<SportType, string> = {
   nba: 'basketball/nba',
   nfl: 'football/nfl',
   mlb: 'baseball/mlb',
   nhl: 'hockey/nhl',
+  mls: 'soccer/usa.1',
 };
 
 const sportDisplayNames: Record<SportType, string> = {
@@ -41,6 +42,7 @@ const sportDisplayNames: Record<SportType, string> = {
   nfl: 'Football',
   mlb: 'Baseball',
   nhl: 'Hockey',
+  mls: 'Soccer',
 };
 
 export async function fetchESPNEvents(sport: SportType) {

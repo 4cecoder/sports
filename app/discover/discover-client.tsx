@@ -58,6 +58,15 @@ const sports = [
     hoverGradient: 'hover:from-cyan-600 hover:to-blue-700',
     bgGradient: 'bg-gradient-to-br from-cyan-500/10 to-blue-600/10',
   },
+  {
+    id: 'mls' as SportType,
+    name: 'MLS',
+    fullName: 'Major League Soccer',
+    emoji: '⚽',
+    gradient: 'from-purple-500 to-pink-600',
+    hoverGradient: 'hover:from-purple-600 hover:to-pink-700',
+    bgGradient: 'bg-gradient-to-br from-purple-500/10 to-pink-600/10',
+  },
 ];
 
 interface ESPNEvent {
@@ -161,7 +170,7 @@ export default function DiscoverClient() {
               </p>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto pt-8">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 max-w-7xl mx-auto pt-8">
               {sports.map((sport) => (
                 <Card
                   key={sport.id}
@@ -400,7 +409,7 @@ export default function DiscoverClient() {
         {!selectedSport && !loading && (
           <div className="mt-12 rounded-2xl border-2 border-dashed border-border/50 bg-muted/20 p-12 text-center animate-fade-in">
             <div className="mx-auto max-w-md space-y-4">
-              <div className="flex justify-center gap-2">
+              <div className="flex justify-center gap-2 flex-wrap">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-2xl animate-bounce">
                   🏀
                 </div>
@@ -412,6 +421,9 @@ export default function DiscoverClient() {
                 </div>
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-2xl animate-bounce [animation-delay:300ms]">
                   🏒
+                </div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-2xl animate-bounce [animation-delay:400ms]">
+                  ⚽
                 </div>
               </div>
               <Trophy className="mx-auto h-12 w-12 text-muted-foreground/50" />
