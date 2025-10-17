@@ -79,40 +79,43 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <div className="relative border-b overflow-hidden">
+        <div className="relative border-b overflow-hidden min-h-[calc(100vh-4rem)]">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <Image
               src="/images/sports/hero-bg.jpg"
               alt="Sports stadium background"
               fill
-              className="object-cover opacity-10 dark:opacity-5"
+              className="object-cover opacity-20 dark:opacity-10"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+            {/* Animated Gradient Overlay */}
+            <div className="absolute inset-0 animated-gradient" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background" />
           </div>
 
-          <div className="relative z-10 container mx-auto px-4 py-16 md:py-24">
-            <div className="mx-auto max-w-4xl text-center space-y-8">
-              <div className="space-y-4">
-                <h1 className="text-4xl font-bold tracking-tight md:text-6xl leading-tight">
+          <div className="relative z-10 container mx-auto px-4 py-12 sm:py-16 md:py-20 lg:py-24 flex items-center min-h-[calc(100vh-4rem)]">
+            <div className="mx-auto max-w-5xl text-center space-y-6 sm:space-y-8 md:space-y-10 w-full">
+              <div className="space-y-4 sm:space-y-6">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight animate-fade-in">
                   The{" "}
-                  <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-pulse">
                     Complete Platform
                   </span>
-                  {" "}for Sports Event Management
+                  <br className="hidden sm:block" />
+                  <span className="block sm:inline"> for Sports Event Management</span>
                 </h1>
-                <p className="text-lg text-muted-foreground md:text-xl max-w-2xl mx-auto leading-relaxed">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
                   Streamline event operations from scheduling to venue management. Import
                   official events from ESPN or create custom events—all in one powerful dashboard.
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
                 <Button
                   asChild
                   size="lg"
-                  className="gradient-blue-green hover:opacity-90 px-8 py-6 text-lg"
+                  className="gradient-blue-green hover:opacity-90 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg w-full sm:w-auto shadow-lg hover:shadow-xl transition-all"
                 >
                   <Link href="/auth/sign-up">
                     <Zap className="mr-2 h-5 w-5" />
@@ -123,29 +126,29 @@ export default function Home() {
                   asChild
                   variant="outline"
                   size="lg"
-                  className="px-8 py-6 text-lg hover:bg-primary hover:text-primary-foreground hover:border-primary"
+                  className="px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg w-full sm:w-auto hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all border-2"
                 >
                   <Link href="/auth/login">Sign In</Link>
                 </Button>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border/50">
-                <div className="space-y-1">
-                  <div className="text-3xl font-bold text-primary">Instant</div>
-                  <div className="text-sm text-muted-foreground">
+              <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 pt-6 sm:pt-8 border-t border-border/50 max-w-4xl mx-auto">
+                <div className="space-y-1 sm:space-y-2">
+                  <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary">Instant</div>
+                  <div className="text-xs sm:text-sm md:text-base text-muted-foreground">
                     Event Creation
                   </div>
                 </div>
-                <div className="space-y-1">
-                  <div className="text-3xl font-bold text-accent">Live</div>
-                  <div className="text-sm text-muted-foreground">
+                <div className="space-y-1 sm:space-y-2">
+                  <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-accent">Live</div>
+                  <div className="text-xs sm:text-sm md:text-base text-muted-foreground">
                     ESPN Integration
                   </div>
                 </div>
-                <div className="space-y-1">
-                  <div className="text-3xl font-bold text-primary">Unlimited</div>
-                  <div className="text-sm text-muted-foreground">
+                <div className="space-y-1 sm:space-y-2">
+                  <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary">Unlimited</div>
+                  <div className="text-xs sm:text-sm md:text-base text-muted-foreground">
                     Venues & Events
                   </div>
                 </div>
