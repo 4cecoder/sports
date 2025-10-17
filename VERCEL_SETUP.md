@@ -17,7 +17,7 @@ Your app is missing required environment variables in Vercel. Follow these steps
    ```
 
    ```
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5b2lneHhkY2J2bmN4ZmloeHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2ODEzMTQsImV4cCI6MjA3NjI1NzMxNH0.RkQJESLNDOSjbwlksI8P-odntPEf-i9O46p2F1f10-4
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_UiT3-MIR2V9X_2XQbgO8Fw_VhkJtQi6
    ```
 
    ```
@@ -60,9 +60,9 @@ vercel env add NEXT_PUBLIC_SUPABASE_URL
 # When prompted, enter: https://eyoigxxdcbvncxfihxqd.supabase.co
 # Select: Production, Preview, Development
 
-# Add Supabase Anon Key
-vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY
-# When prompted, enter: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5b2lneHhkY2J2bmN4ZmloeHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2ODEzMTQsImV4cCI6MjA3NjI1NzMxNH0.RkQJESLNDOSjbwlksI8P-odntPEf-i9O46p2F1f10-4
+# Add Supabase Publishable Key
+vercel env add NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+# When prompted, enter: sb_publishable_UiT3-MIR2V9X_2XQbgO8Fw_VhkJtQi6
 # Select: Production, Preview, Development
 
 # Add Database URL
@@ -96,7 +96,7 @@ vercel --prod
 
 **Solution:**
 - Make sure you added the variables to ALL environments (Production, Preview, Development)
-- Verify the variable names are exactly: `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- Verify the variable names are exactly: `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 - Redeploy after adding variables
 
 ### Issue: Environment variables not showing up
@@ -117,7 +117,7 @@ vercel --prod
 | Variable | Value | Required |
 |----------|-------|----------|
 | `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL | Yes |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anonymous key | Yes |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Your Supabase publishable key | Yes |
 | `DATABASE_URL` | PostgreSQL connection string | Yes |
 
 ## Next Steps

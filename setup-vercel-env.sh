@@ -10,9 +10,9 @@ vercel env add NEXT_PUBLIC_SUPABASE_URL production <<< "https://eyoigxxdcbvncxfi
 vercel env add NEXT_PUBLIC_SUPABASE_URL preview <<< "https://eyoigxxdcbvncxfihxqd.supabase.co"
 vercel env add NEXT_PUBLIC_SUPABASE_URL development <<< "https://eyoigxxdcbvncxfihxqd.supabase.co"
 
-vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY production <<< "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5b2lneHhkY2J2bmN4ZmloeHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2ODEzMTQsImV4cCI6MjA3NjI1NzMxNH0.RkQJESLNDOSjbwlksI8P-odntPEf-i9O46p2F1f10-4"
-vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY preview <<< "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5b2lneHhkY2J2bmN4ZmloeHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2ODEzMTQsImV4cCI6MjA3NjI1NzMxNH0.RkQJESLNDOSjbwlksI8P-odntPEf-i9O46p2F1f10-4"
-vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY development <<< "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5b2lneHhkY2J2bmN4ZmloeHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2ODEzMTQsImV4cCI6MjA3NjI1NzMxNH0.RkQJESLNDOSjbwlksI8P-odntPEf-i9O46p2F1f10-4"
+vercel env add NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY production <<< "sb_publishable_UiT3-MIR2V9X_2XQbgO8Fw_VhkJtQi6"
+vercel env add NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY preview <<< "sb_publishable_UiT3-MIR2V9X_2XQbgO8Fw_VhkJtQi6"
+vercel env add NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY development <<< "sb_publishable_UiT3-MIR2V9X_2XQbgO8Fw_VhkJtQi6"
 
 echo ""
 echo "⚠️  IMPORTANT: You need to manually add the DATABASE_URL"
