@@ -234,21 +234,79 @@ export function EventCalendar({ events }: EventCalendarProps) {
 
         .custom-calendar .rbc-agenda-view table.rbc-agenda-table {
           border-color: hsl(var(--border));
+          border-collapse: separate;
+          border-spacing: 0;
+        }
+
+        .custom-calendar .rbc-agenda-view table.rbc-agenda-table thead > tr > th {
+          background: hsl(var(--muted) / 0.5);
+          padding: 16px;
+          font-weight: 600;
+          font-size: 0.875rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: hsl(var(--foreground));
+          border-bottom: 2px solid hsl(var(--border));
+        }
+
+        .custom-calendar .rbc-agenda-view table.rbc-agenda-table tbody > tr {
+          transition: all 0.2s;
+        }
+
+        .custom-calendar .rbc-agenda-view table.rbc-agenda-table tbody > tr:hover {
+          background: hsl(var(--muted) / 0.3);
         }
 
         .custom-calendar .rbc-agenda-view table.rbc-agenda-table tbody > tr > td {
-          padding: 12px;
-          border-color: hsl(var(--border) / 0.5);
+          padding: 20px 16px;
+          border-bottom: 1px solid hsl(var(--border) / 0.3);
           color: hsl(var(--foreground));
+          vertical-align: middle;
         }
 
-        .custom-calendar .rbc-agenda-view table.rbc-agenda-table tbody > tr > td + td {
-          color: hsl(var(--muted-foreground));
+        .custom-calendar .rbc-agenda-date-cell {
+          font-weight: 600;
+          font-size: 0.9rem;
+          color: hsl(var(--primary));
+          background: hsl(var(--primary) / 0.08);
+          border-right: 3px solid hsl(var(--primary));
+          min-width: 120px;
         }
 
-        .custom-calendar .rbc-agenda-date-cell,
         .custom-calendar .rbc-agenda-time-cell {
+          font-weight: 600;
+          font-size: 0.875rem;
+          color: hsl(var(--foreground));
+          min-width: 140px;
+          font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+          background: hsl(var(--muted) / 0.2);
+        }
+
+        .custom-calendar .rbc-agenda-event-cell {
+          font-size: 0.95rem;
           font-weight: 500;
+          color: hsl(var(--foreground));
+          padding-left: 24px !important;
+        }
+
+        .custom-calendar .rbc-agenda-event-cell a {
+          color: hsl(var(--foreground));
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          background: linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(var(--accent) / 0.12));
+          border-radius: 8px;
+          border-left: 4px solid hsl(var(--primary));
+          transition: all 0.2s;
+          width: 100%;
+        }
+
+        .custom-calendar .rbc-agenda-event-cell a:hover {
+          background: linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--accent) / 0.2));
+          transform: translateX(4px);
+          border-left-color: hsl(var(--accent));
         }
 
         .custom-calendar .rbc-time-slot {
@@ -305,8 +363,33 @@ export function EventCalendar({ events }: EventCalendarProps) {
             font-size: 0.75rem;
           }
 
+          .custom-calendar .rbc-agenda-view table.rbc-agenda-table thead > tr > th {
+            padding: 12px 8px;
+            font-size: 0.75rem;
+          }
+
           .custom-calendar .rbc-agenda-view table.rbc-agenda-table tbody > tr > td {
-            padding: 8px;
+            padding: 16px 12px;
+            font-size: 0.875rem;
+          }
+
+          .custom-calendar .rbc-agenda-date-cell {
+            font-size: 0.85rem;
+            min-width: 100px;
+          }
+
+          .custom-calendar .rbc-agenda-time-cell {
+            font-size: 0.8rem;
+            min-width: 120px;
+          }
+
+          .custom-calendar .rbc-agenda-event-cell {
+            font-size: 0.875rem;
+            padding-left: 12px !important;
+          }
+
+          .custom-calendar .rbc-agenda-event-cell a {
+            padding: 6px 12px;
             font-size: 0.875rem;
           }
         }
