@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { getEvents } from '@/lib/actions/event-actions';
+import { getEvents, getSportTypes } from '@/lib/actions/event-actions';
 import { DashboardClient } from './dashboard-client';
 import type { Metadata } from 'next';
 
@@ -25,12 +25,18 @@ export default async function DashboardPage({
 
   const params = await searchParams;
   const eventsResult = await getEvents(params);
+  const sportTypesResult = await getSportTypes();
 
   if (!eventsResult.success) {
     console.error('Failed to fetch events:', eventsResult.error);
   }
 
+  if (!sportTypesResult.success) {
+    console.error('Failed to fetch sport types:', sportTypesResult.error);
+  }
+
   const events = eventsResult.success ? eventsResult.data : [];
+  const sportTypes = sportTypesResult.success ? sportTypesResult.data : [];
 
   return (
     <DashboardClient
@@ -38,6 +44,7 @@ export default async function DashboardPage({
       user={user}
       initialSearch={params.search}
       initialSportType={params.sportType}
+      availableSportTypes={sportTypes}
     />
   );
 }

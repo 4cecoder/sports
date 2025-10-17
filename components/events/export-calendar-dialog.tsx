@@ -5,6 +5,13 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Calendar, Download, Loader2 } from 'lucide-react';
 import { exportToCalendar } from '@/lib/actions/calendar-export';
 import { toast } from 'sonner';
@@ -12,9 +19,10 @@ import { format } from 'date-fns';
 
 interface ExportCalendarDialogProps {
   trigger?: React.ReactNode;
+  availableSportTypes?: string[];
 }
 
-export function ExportCalendarDialog({ trigger }: ExportCalendarDialogProps) {
+export function ExportCalendarDialog({ trigger, availableSportTypes = [] }: ExportCalendarDialogProps) {
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [startDate, setStartDate] = useState('');
@@ -116,15 +124,21 @@ export function ExportCalendarDialog({ trigger }: ExportCalendarDialogProps) {
           {/* Sport Type Filter */}
           <div className="space-y-2">
             <Label htmlFor="sportType">Sport Type (optional)</Label>
-            <Input
-              id="sportType"
-              type="text"
-              value={sportType}
-              onChange={(e) => setSportType(e.target.value)}
-              placeholder="e.g., Basketball, Football"
-            />
+            <Select value={sportType} onValueChange={setSportType}>
+              <SelectTrigger>
+                <SelectValue placeholder="All sports" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="">All sports</SelectItem>
+                {availableSportTypes.map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <p className="text-xs text-muted-foreground">
-              Leave blank to export all sports
+              Select a sport to filter exported events
             </p>
           </div>
 

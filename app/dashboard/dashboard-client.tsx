@@ -6,6 +6,13 @@ import { type EventWithVenues } from '@/lib/actions/event-actions';
 import { type User } from '@supabase/supabase-js';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Plus, Search, LogOut, Compass } from 'lucide-react';
 import { EventCard } from '@/components/events/event-card';
 import { EventListItem } from '@/components/events/event-list-item';
@@ -25,6 +32,7 @@ interface DashboardClientProps {
   user: User;
   initialSearch?: string;
   initialSportType?: string;
+  availableSportTypes: string[];
 }
 
 export function DashboardClient({
@@ -32,6 +40,7 @@ export function DashboardClient({
   user,
   initialSearch = '',
   initialSportType = '',
+  availableSportTypes,
 }: DashboardClientProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -118,13 +127,31 @@ export function DashboardClient({
                     className="pl-9 border-border/50 focus:border-primary"
                   />
                 </div>
-                <Input
-                  placeholder="Sport type..."
+                <Select
                   value={sportType}
-                  onChange={(e) => setSportType(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                  className="w-full sm:w-40 border-border/50 focus:border-primary"
-                />
+                  onValueChange={(value) => {
+                    setSportType(value);
+                    // Auto-trigger search when dropdown changes
+                    const params = new URLSearchParams();
+                    if (search) params.set('search', search);
+                    if (value) params.set('sportType', value);
+                    startTransition(() => {
+                      router.push(`/dashboard?${params.toString()}`);
+                    });
+                  }}
+                >
+                  <SelectTrigger className="w-full sm:w-48 border-border/50 focus:border-primary">
+                    <SelectValue placeholder="All sports" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">All sports</SelectItem>
+                    {availableSportTypes.map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {type}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <Button
                   onClick={handleSearch}
                   disabled={isPending}
@@ -136,7 +163,7 @@ export function DashboardClient({
               </div>
               <div className="flex items-center gap-2 flex-wrap">
                 <ViewSwitcher view={view} onViewChange={setView} />
-                <ExportCalendarDialog />
+                <ExportCalendarDialog availableSportTypes={availableSportTypes} />
                 <Button
                   onClick={() => setIsCreateOpen(true)}
                   className="gradient-blue-green hover:opacity-90 transition-opacity"
