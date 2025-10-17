@@ -50,7 +50,7 @@ export function DeleteEventDialog({
         <DialogHeader>
           <DialogTitle>Delete Event</DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete "{event.name}"? This action cannot be undone.
+            Are you sure you want to delete &quot;{event.name}&quot;? This action cannot be undone.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>

@@ -37,11 +37,6 @@ const DeleteEventSchema = z.object({
   id: z.string().uuid(),
 });
 
-const GetEventsSchema = z.object({
-  search: z.string().optional(),
-  sportType: z.string().optional(),
-});
-
 // Types
 export type EventWithVenues = Event & { venues: Venue[] };
 
