@@ -1,9 +1,9 @@
 'use client';
 
-import { LayoutGrid, List } from 'lucide-react';
+import { LayoutGrid, List, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export type ViewMode = 'grid' | 'list';
+export type ViewMode = 'grid' | 'list' | 'calendar';
 
 interface ViewSwitcherProps {
   view: ViewMode;
@@ -38,6 +38,19 @@ export function ViewSwitcher({ view, onViewChange }: ViewSwitcherProps) {
       >
         <List className="h-4 w-4" />
         <span className="ml-2 hidden sm:inline">List</span>
+      </Button>
+      <Button
+        variant={view === 'calendar' ? 'default' : 'ghost'}
+        size="sm"
+        onClick={() => onViewChange('calendar')}
+        className={`h-8 px-3 ${
+          view === 'calendar'
+            ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+            : 'hover:bg-muted'
+        }`}
+      >
+        <Calendar className="h-4 w-4" />
+        <span className="ml-2 hidden sm:inline">Calendar</span>
       </Button>
     </div>
   );

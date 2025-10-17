@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Plus, Search, LogOut, Compass } from 'lucide-react';
 import { EventCard } from '@/components/events/event-card';
 import { EventListItem } from '@/components/events/event-list-item';
+import { EventCalendar } from '@/components/events/event-calendar';
 import { EventFormDialog } from '@/components/events/event-form-dialog';
 import { ExportCalendarDialog } from '@/components/events/export-calendar-dialog';
 import { ThemeSwitcher } from '@/components/theme-switcher';
@@ -193,11 +194,15 @@ export function DashboardClient({
               <EventCard key={event.id} event={event} />
             ))}
           </div>
-        ) : (
+        ) : view === 'list' ? (
           <div className="flex flex-col gap-4 animate-fade-in">
             {initialEvents.map((event) => (
               <EventListItem key={event.id} event={event} />
             ))}
+          </div>
+        ) : (
+          <div className="animate-fade-in">
+            <EventCalendar events={initialEvents} />
           </div>
         )}
       </main>
