@@ -9,6 +9,9 @@ export const events = pgTable('events', {
   date: timestamp('date', { withTimezone: true }).notNull(),
   description: text('description'),
   userId: uuid('user_id').notNull(), // References auth.users
+  externalSource: varchar('external_source', { length: 50 }), // e.g., 'ESPN', 'TheSportsDB'
+  externalId: varchar('external_id', { length: 255 }), // API-specific event ID
+  lastSyncedAt: timestamp('last_synced_at', { withTimezone: true }), // Last time external data was synced
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 });

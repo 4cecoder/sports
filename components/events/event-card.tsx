@@ -6,7 +6,7 @@ import { type EventWithVenues } from '@/lib/actions/event-actions';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, MapPin, Edit, Trash2 } from 'lucide-react';
+import { Calendar, MapPin, Edit, Trash2, ExternalLink } from 'lucide-react';
 import { EventFormDialog } from './event-form-dialog';
 import { DeleteEventDialog } from './delete-event-dialog';
 
@@ -34,6 +34,15 @@ export function EventCard({ event }: EventCardProps) {
                 >
                   {event.sportType}
                 </Badge>
+                {event.externalSource && (
+                  <Badge
+                    variant="outline"
+                    className="bg-accent/10 text-accent border-accent/20 flex items-center gap-1"
+                  >
+                    <ExternalLink className="h-3 w-3" />
+                    {event.externalSource}
+                  </Badge>
+                )}
               </CardDescription>
             </div>
           </div>

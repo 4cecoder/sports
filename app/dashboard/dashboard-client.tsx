@@ -6,12 +6,13 @@ import { type EventWithVenues } from '@/lib/actions/event-actions';
 import { type User } from '@supabase/supabase-js';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Search, LogOut } from 'lucide-react';
+import { Plus, Search, LogOut, Compass } from 'lucide-react';
 import { EventCard } from '@/components/events/event-card';
 import { EventFormDialog } from '@/components/events/event-form-dialog';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
+import Link from 'next/link';
 
 interface DashboardClientProps {
   initialEvents: EventWithVenues[];
@@ -69,6 +70,12 @@ export function DashboardClient({
             </div>
             <div className="flex items-center gap-2">
               <ThemeSwitcher />
+              <Link href="/discover">
+                <Button variant="outline" className="hover:bg-primary hover:text-primary-foreground hover:border-primary">
+                  <Compass className="h-4 w-4 md:mr-2" />
+                  <span className="hidden md:inline">Discover</span>
+                </Button>
+              </Link>
               <Button variant="outline" onClick={handleSignOut} className="hover:bg-destructive hover:text-destructive-foreground hover:border-destructive">
                 <LogOut className="h-4 w-4 md:mr-2" />
                 <span className="hidden md:inline">Sign Out</span>

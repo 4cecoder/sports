@@ -22,6 +22,8 @@ const CreateEventSchema = z.object({
   date: z.string().or(z.date()),
   description: z.string().optional(),
   venues: z.array(VenueSchema).min(1, 'At least one venue is required'),
+  externalSource: z.string().optional(),
+  externalId: z.string().optional(),
 });
 
 const UpdateEventSchema = z.object({
@@ -58,6 +60,9 @@ export const createEvent = createAuthenticatedAction(
         ...eventData,
         date: eventDate,
         userId,
+        externalSource: input.externalSource,
+        externalId: input.externalId,
+        lastSyncedAt: input.externalSource ? new Date() : undefined,
       })
       .returning();
 
