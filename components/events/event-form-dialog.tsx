@@ -24,8 +24,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Plus, Trash2 } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
+import { Plus, Trash2, Calendar, MapPin, Trophy, FileText } from 'lucide-react';
 import { toast } from 'sonner';
 
 const venueSchema = z.object({
@@ -108,82 +110,124 @@ export function EventFormDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[600px]">
-        <DialogHeader>
-          <DialogTitle>{mode === 'create' ? 'Create Event' : 'Edit Event'}</DialogTitle>
-          <DialogDescription>
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[700px]">
+        <DialogHeader className="pb-4">
+          <DialogTitle className="text-2xl flex items-center gap-2">
+            <div className="rounded-full bg-primary/10 p-2">
+              <Trophy className="h-5 w-5 text-primary" />
+            </div>
+            {mode === 'create' ? 'Create New Event' : 'Edit Event'}
+          </DialogTitle>
+          <DialogDescription className="text-base">
             {mode === 'create'
-              ? 'Create a new sports event with venue information'
-              : 'Update event details and venues'}
+              ? 'Fill in the details below to create a new sports event with venue information.'
+              : 'Update the event details and venue information below.'}
           </DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* Event Name */}
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Event Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Championship Finals" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {/* Event Details Section */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                <FileText className="h-4 w-4 text-primary" />
+                Event Details
+              </div>
+              <Separator />
 
-            {/* Sport Type */}
-            <FormField
-              control={form.control}
-              name="sportType"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Sport Type</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Basketball, Soccer, Tennis..." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <div className="grid gap-4 sm:grid-cols-2">
+                {/* Event Name */}
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem className="sm:col-span-2">
+                      <FormLabel className="text-sm font-medium">Event Name *</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="e.g., Championship Finals 2024"
+                          className="h-11"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            {/* Date & Time */}
-            <FormField
-              control={form.control}
-              name="date"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Date & Time</FormLabel>
-                  <FormControl>
-                    <Input type="datetime-local" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                {/* Sport Type */}
+                <FormField
+                  control={form.control}
+                  name="sportType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium flex items-center gap-1.5">
+                        <Trophy className="h-3.5 w-3.5" />
+                        Sport Type *
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="e.g., Basketball"
+                          className="h-11"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            {/* Description */}
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Event description..." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                {/* Date & Time */}
+                <FormField
+                  control={form.control}
+                  name="date"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium flex items-center gap-1.5">
+                        <Calendar className="h-3.5 w-3.5" />
+                        Date & Time *
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="datetime-local"
+                          className="h-11"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            {/* Venues */}
+                {/* Description */}
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem className="sm:col-span-2">
+                      <FormLabel className="text-sm font-medium">Description</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Add event description, rules, or additional information..."
+                          className="resize-none"
+                          rows={3}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+
+            {/* Venues Section */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <FormLabel>Venues</FormLabel>
+                <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <MapPin className="h-4 w-4 text-primary" />
+                  Venue Locations
+                </div>
                 <Button
                   type="button"
                   variant="outline"
@@ -191,120 +235,160 @@ export function EventFormDialog({
                   onClick={() =>
                     append({ name: '', address: '', city: '', state: '', country: '' })
                   }
+                  className="gap-1.5"
                 >
-                  <Plus className="mr-2 h-4 w-4" />
+                  <Plus className="h-4 w-4" />
                   Add Venue
                 </Button>
               </div>
+              <Separator />
 
-              {fields.map((field, index) => (
-                <div key={field.id} className="space-y-3 rounded-lg border p-4">
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm font-medium">Venue {index + 1}</p>
-                    {fields.length > 1 && (
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => remove(index)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    )}
-                  </div>
-
-                  <FormField
-                    control={form.control}
-                    name={`venues.${index}.name`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Venue Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Madison Square Garden" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name={`venues.${index}.address`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Address</FormLabel>
-                        <FormControl>
-                          <Input placeholder="123 Main St" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <FormField
-                      control={form.control}
-                      name={`venues.${index}.city`}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>City</FormLabel>
-                          <FormControl>
-                            <Input placeholder="New York" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
+              <div className="space-y-4">
+                {fields.map((field, index) => (
+                  <div
+                    key={field.id}
+                    className="space-y-4 rounded-lg border border-border/50 bg-muted/20 p-4 transition-colors hover:border-border"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+                          {index + 1}
+                        </div>
+                        <p className="text-sm font-medium text-muted-foreground">
+                          Venue Location
+                        </p>
+                      </div>
+                      {fields.length > 1 && (
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => remove(index)}
+                          className="h-8 text-destructive hover:bg-destructive/10 hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
                       )}
-                    />
+                    </div>
 
-                    <FormField
-                      control={form.control}
-                      name={`venues.${index}.state`}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>State</FormLabel>
-                          <FormControl>
-                            <Input placeholder="NY" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <FormField
+                        control={form.control}
+                        name={`venues.${index}.name`}
+                        render={({ field }) => (
+                          <FormItem className="sm:col-span-2">
+                            <FormLabel className="text-sm font-medium">Venue Name *</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="e.g., Madison Square Garden"
+                                className="h-10"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name={`venues.${index}.address`}
+                        render={({ field }) => (
+                          <FormItem className="sm:col-span-2">
+                            <FormLabel className="text-sm">Street Address</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="e.g., 4 Pennsylvania Plaza"
+                                className="h-10"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name={`venues.${index}.city`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-sm">City</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="e.g., New York"
+                                className="h-10"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name={`venues.${index}.state`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-sm">State / Province</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="e.g., NY"
+                                className="h-10"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name={`venues.${index}.country`}
+                        render={({ field }) => (
+                          <FormItem className="sm:col-span-2">
+                            <FormLabel className="text-sm">Country</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="e.g., United States"
+                                className="h-10"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
                   </div>
-
-                  <FormField
-                    control={form.control}
-                    name={`venues.${index}.country`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Country</FormLabel>
-                        <FormControl>
-                          <Input placeholder="USA" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
-            <DialogFooter>
+            <DialogFooter className="gap-2 sm:gap-0">
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => onOpenChange(false)}
                 disabled={isSubmitting}
+                className="sm:mr-2"
               >
                 Cancel
               </Button>
-              <Button type="submit" disabled={isSubmitting}>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="gradient-blue-green hover:opacity-90"
+              >
                 {isSubmitting
                   ? mode === 'create'
-                    ? 'Creating...'
-                    : 'Updating...'
+                    ? 'Creating Event...'
+                    : 'Updating Event...'
                   : mode === 'create'
                     ? 'Create Event'
-                    : 'Update Event'}
+                    : 'Save Changes'}
               </Button>
             </DialogFooter>
           </form>
