@@ -76,9 +76,9 @@ export function DashboardClient({
             <div className="flex items-center gap-2">
               <ThemeSwitcher />
               <Link href="/discover">
-                <Button variant="outline" className="hover:bg-primary hover:text-primary-foreground hover:border-primary">
+                <Button className="gradient-blue-green hover:opacity-90 transition-opacity">
                   <Compass className="h-4 w-4 md:mr-2" />
-                  <span className="hidden md:inline">Discover</span>
+                  <span className="hidden md:inline">Discover Events</span>
                 </Button>
               </Link>
               <Button variant="outline" onClick={handleSignOut} className="hover:bg-destructive hover:text-destructive-foreground hover:border-destructive">
@@ -134,6 +134,32 @@ export function DashboardClient({
                   Create Event
                 </Button>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Discover Events Banner */}
+        <div className="mb-6 animate-fade-in">
+          <div className="relative overflow-hidden rounded-lg border border-primary/20 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 p-6 shadow-lg">
+            <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(0deg,transparent,black)]" />
+            <div className="relative flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="rounded-full bg-gradient-to-br from-primary to-accent p-3">
+                  <Compass className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-1">Discover Live Sports Events</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Browse upcoming games and matches from ESPN and import them to your calendar
+                  </p>
+                </div>
+              </div>
+              <Link href="/discover">
+                <Button size="lg" className="gradient-blue-green hover:opacity-90 transition-opacity whitespace-nowrap">
+                  <Compass className="mr-2 h-5 w-5" />
+                  Browse Events
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
