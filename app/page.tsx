@@ -245,7 +245,7 @@ export default function Home() {
                 </div>
                 <div className="relative aspect-square rounded-xl overflow-hidden group">
                   <Image
-                    src="https://images.pexels.com/photos/1371732/pexels-photo-1371732.jpeg?auto=compress&cs=tinysrgb&w=500"
+                    src="https://images.pexels.com/photos/20025288/pexels-photo-20025288.jpeg?auto=compress&cs=tinysrgb&w=500"
                     alt="Hockey"
                     fill
                     className="object-cover transition-transform group-hover:scale-110"
