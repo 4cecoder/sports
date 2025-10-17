@@ -8,8 +8,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Plus, Search, LogOut, Compass } from 'lucide-react';
 import { EventCard } from '@/components/events/event-card';
+import { EventListItem } from '@/components/events/event-list-item';
 import { EventFormDialog } from '@/components/events/event-form-dialog';
 import { ThemeSwitcher } from '@/components/theme-switcher';
+import { ViewSwitcher } from '@/components/view-switcher';
+import { useViewPreference } from '@/hooks/use-view-preference';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
 import Link from 'next/link';
@@ -32,6 +35,7 @@ export function DashboardClient({
   const [search, setSearch] = useState(initialSearch);
   const [sportType, setSportType] = useState(initialSportType);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [view, setView] = useViewPreference('grid');
 
   const handleSearch = () => {
     const params = new URLSearchParams();
@@ -118,18 +122,21 @@ export function DashboardClient({
                   <span className="hidden md:inline">Filter</span>
                 </Button>
               </div>
-              <Button
-                onClick={() => setIsCreateOpen(true)}
-                className="gradient-blue-green hover:opacity-90 transition-opacity"
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                Create Event
-              </Button>
+              <div className="flex items-center gap-2">
+                <ViewSwitcher view={view} onViewChange={setView} />
+                <Button
+                  onClick={() => setIsCreateOpen(true)}
+                  className="gradient-blue-green hover:opacity-90 transition-opacity"
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  Create Event
+                </Button>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Events Grid */}
+        {/* Events Display */}
         {initialEvents.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-border/50 bg-muted/10 p-12 text-center animate-fade-in">
             <div className="rounded-full bg-primary/10 p-4 mb-4">
@@ -152,10 +159,16 @@ export function DashboardClient({
               </Button>
             )}
           </div>
-        ) : (
+        ) : view === 'grid' ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 animate-fade-in">
             {initialEvents.map((event) => (
               <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col gap-4 animate-fade-in">
+            {initialEvents.map((event) => (
+              <EventListItem key={event.id} event={event} />
             ))}
           </div>
         )}
