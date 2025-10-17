@@ -18,6 +18,7 @@ import { useViewPreference } from '@/hooks/use-view-preference';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface DashboardClientProps {
   initialEvents: EventWithVenues[];
@@ -66,13 +67,22 @@ export function DashboardClient({
       <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 py-4 md:py-6">
           <div className="flex items-center justify-between gap-4">
-            <div className="flex-1">
-              <h1 className="text-2xl font-bold md:text-3xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Fastbreak Event Dashboard
-              </h1>
-              <p className="text-sm text-muted-foreground mt-1">
-                Welcome back, <span className="font-medium text-foreground">{user.email}</span>
-              </p>
+            <div className="flex-1 flex items-center gap-3">
+              <Image
+                src="/logo.svg"
+                alt="Fastbreak Logo"
+                width={40}
+                height={40}
+                className="flex-shrink-0"
+              />
+              <div>
+                <h1 className="text-2xl font-bold md:text-3xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Fastbreak Event Dashboard
+                </h1>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Welcome back, <span className="font-medium text-foreground">{user.email}</span>
+                </p>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <ThemeSwitcher />
