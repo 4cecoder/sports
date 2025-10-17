@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -7,49 +8,49 @@ import {
   MapPin,
   Trophy,
   Users,
-  Filter,
   Zap,
   Shield,
   Search,
+  Sparkles,
 } from "lucide-react";
 
 export default function Home() {
   const features = [
     {
       icon: Calendar,
-      title: "Event Management",
+      title: "Streamlined Scheduling",
       description:
-        "Create and manage sports events with detailed information including dates, times, and descriptions",
+        "Create and manage events with precision—track dates, times, and every detail that matters for seamless execution",
     },
     {
       icon: MapPin,
-      title: "Multiple Venues",
+      title: "Multi-Venue Operations",
       description:
-        "Add multiple venues to each event with complete address and location details",
+        "Coordinate across multiple locations effortlessly with comprehensive venue management and address tracking",
+    },
+    {
+      icon: Sparkles,
+      title: "Official Event Integration",
+      description:
+        "Import live events from ESPN instantly—NBA, NFL, MLB, NHL games automatically synced to your dashboard",
     },
     {
       icon: Search,
-      title: "Smart Search",
+      title: "Intelligent Discovery",
       description:
-        "Powerful search and filtering by event name, description, or sport type",
+        "Find exactly what you need with powerful search and filtering—by sport type, name, or custom criteria",
     },
     {
       icon: Trophy,
-      title: "Sport Categories",
+      title: "Sport-Specific Organization",
       description:
-        "Organize events by sport type for easy management and discovery",
-    },
-    {
-      icon: Filter,
-      title: "Advanced Filters",
-      description:
-        "Filter events by sport type and search criteria with server-side performance",
+        "Manage any sport with dedicated categorization systems designed for diverse athletic operations",
     },
     {
       icon: Shield,
-      title: "Secure Authentication",
+      title: "Enterprise-Grade Security",
       description:
-        "Supabase-powered authentication with email and Google OAuth sign-in",
+        "Protected by Supabase authentication with email and OAuth—your data stays secure, always",
     },
   ];
 
@@ -78,20 +79,32 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <div className="border-b bg-gradient-to-b from-background to-muted/20">
-          <div className="container mx-auto px-4 py-16 md:py-24">
+        <div className="relative border-b overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="https://images.pexels.com/photos/1040157/pexels-photo-1040157.jpeg?auto=compress&cs=tinysrgb&w=1920"
+              alt="Sports stadium background"
+              fill
+              className="object-cover opacity-10 dark:opacity-5"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+          </div>
+
+          <div className="relative z-10 container mx-auto px-4 py-16 md:py-24">
             <div className="mx-auto max-w-4xl text-center space-y-8">
               <div className="space-y-4">
-                <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
-                  Manage Your Sports Events{" "}
+                <h1 className="text-4xl font-bold tracking-tight md:text-6xl leading-tight">
+                  The{" "}
                   <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                    With Ease
+                    Complete Platform
                   </span>
+                  {" "}for Sports Event Management
                 </h1>
-                <p className="text-lg text-muted-foreground md:text-xl max-w-2xl mx-auto">
-                  The complete platform for creating, organizing, and managing
-                  sports events with multiple venues. Built for teams, leagues,
-                  and event organizers.
+                <p className="text-lg text-muted-foreground md:text-xl max-w-2xl mx-auto leading-relaxed">
+                  Streamline event operations from scheduling to venue management. Import
+                  official events from ESPN or create custom events—all in one powerful dashboard.
                 </p>
               </div>
 
@@ -119,21 +132,21 @@ export default function Home() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border/50">
                 <div className="space-y-1">
-                  <div className="text-3xl font-bold text-primary">Fast</div>
+                  <div className="text-3xl font-bold text-primary">Instant</div>
                   <div className="text-sm text-muted-foreground">
-                    Server Actions
+                    Event Creation
                   </div>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-3xl font-bold text-accent">Secure</div>
+                  <div className="text-3xl font-bold text-accent">Live</div>
                   <div className="text-sm text-muted-foreground">
-                    Auth Protected
+                    ESPN Integration
                   </div>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-3xl font-bold text-primary">Modern</div>
+                  <div className="text-3xl font-bold text-primary">Unlimited</div>
                   <div className="text-sm text-muted-foreground">
-                    Next.js 15
+                    Venues & Events
                   </div>
                 </div>
               </div>
@@ -146,11 +159,11 @@ export default function Home() {
           <div className="mx-auto max-w-6xl">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl font-bold md:text-4xl">
-                Everything You Need
+                Built for Modern Event Operations
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Powerful features to help you manage sports events efficiently
-                and effectively
+                Everything you need to run professional sports events—from local leagues
+                to multi-venue tournaments
               </p>
             </div>
 
@@ -182,17 +195,92 @@ export default function Home() {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="border-t">
+        {/* Sports Showcase Section */}
+        <div className="border-y bg-muted/20">
           <div className="container mx-auto px-4 py-16 md:py-24">
+            <div className="mx-auto max-w-6xl">
+              <div className="text-center space-y-4 mb-12">
+                <h2 className="text-3xl font-bold md:text-4xl">
+                  Powering Events Across All Sports
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  From professional leagues to grassroots tournaments—manage basketball,
+                  football, baseball, hockey, and beyond
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="relative aspect-square rounded-xl overflow-hidden group">
+                  <Image
+                    src="https://images.pexels.com/photos/1752757/pexels-photo-1752757.jpeg?auto=compress&cs=tinysrgb&w=500"
+                    alt="Basketball"
+                    fill
+                    className="object-cover transition-transform group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
+                    <span className="text-white font-bold text-xl">🏀 Basketball</span>
+                  </div>
+                </div>
+                <div className="relative aspect-square rounded-xl overflow-hidden group">
+                  <Image
+                    src="https://images.pexels.com/photos/1618200/pexels-photo-1618200.jpeg?auto=compress&cs=tinysrgb&w=500"
+                    alt="Football"
+                    fill
+                    className="object-cover transition-transform group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
+                    <span className="text-white font-bold text-xl">🏈 Football</span>
+                  </div>
+                </div>
+                <div className="relative aspect-square rounded-xl overflow-hidden group">
+                  <Image
+                    src="https://images.pexels.com/photos/1661950/pexels-photo-1661950.jpeg?auto=compress&cs=tinysrgb&w=500"
+                    alt="Baseball"
+                    fill
+                    className="object-cover transition-transform group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
+                    <span className="text-white font-bold text-xl">⚾ Baseball</span>
+                  </div>
+                </div>
+                <div className="relative aspect-square rounded-xl overflow-hidden group">
+                  <Image
+                    src="https://images.pexels.com/photos/1371732/pexels-photo-1371732.jpeg?auto=compress&cs=tinysrgb&w=500"
+                    alt="Hockey"
+                    fill
+                    className="object-cover transition-transform group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
+                    <span className="text-white font-bold text-xl">🏒 Hockey</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="relative overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="https://images.pexels.com/photos/3628100/pexels-photo-3628100.jpeg?auto=compress&cs=tinysrgb&w=1920"
+              alt="Sports action background"
+              fill
+              className="object-cover opacity-10 dark:opacity-5"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background" />
+          </div>
+
+          <div className="relative z-10 container mx-auto px-4 py-16 md:py-24">
             <div className="mx-auto max-w-3xl text-center space-y-8">
               <div className="space-y-4">
                 <h2 className="text-3xl font-bold md:text-4xl">
-                  Ready to Get Started?
+                  Transform Your Event Operations Today
                 </h2>
                 <p className="text-lg text-muted-foreground">
-                  Join today and start managing your sports events like a pro.
-                  No credit card required.
+                  Join leagues and organizers streamlining their sports events.
+                  Start free—no credit card required.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4 justify-center">
