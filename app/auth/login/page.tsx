@@ -1,4 +1,10 @@
 import { LoginForm } from "@/components/login-form";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Login',
+  description: 'Sign in to your Fastbreak account to manage your sports events.',
+};
 
 export default function Page() {
   return (

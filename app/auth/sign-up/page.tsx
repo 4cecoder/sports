@@ -1,4 +1,10 @@
 import { SignUpForm } from "@/components/sign-up-form";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Sign Up',
+  description: 'Create your Fastbreak account to start managing sports events.',
+};
 
 export default function Page() {
   return (

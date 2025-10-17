@@ -2,8 +2,14 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { getEvents } from '@/lib/actions/event-actions';
 import { DashboardClient } from './dashboard-client';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+  description: 'View and manage all your sports events. Search, filter, and organize your event schedule.',
+};
 
 export default async function DashboardPage({
   searchParams,
