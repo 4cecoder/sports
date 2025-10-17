@@ -62,20 +62,20 @@ export function SignUpForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       {/* Hero Section */}
       <div className="text-center space-y-3 mb-2 animate-slide-up">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 via-orange-500 to-red-600 shadow-2xl shadow-purple-500/50 mb-4">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent shadow-2xl shadow-primary/50 mb-4">
           <Sparkles className="w-10 h-10 text-white" />
         </div>
-        <h1 className="text-5xl font-display font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+        <h1 className="text-5xl font-display font-bold text-foreground drop-shadow-lg">
           Fastbreak
         </h1>
-        <p className="text-lg text-white/90 font-medium">
+        <p className="text-lg text-foreground/80 font-medium">
           Join the winning team!
         </p>
       </div>
 
-      <Card className="border-white/20 bg-white/95 dark:bg-black/80 backdrop-blur-xl shadow-2xl animate-slide-up">
+      <Card className="border-border/50 bg-card backdrop-blur-xl shadow-2xl animate-slide-up">
         <CardHeader className="text-center pb-4">
-          <CardTitle className="text-3xl font-display bg-gradient-to-r from-purple-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
+          <CardTitle className="text-3xl font-display bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Sign Up
           </CardTitle>
           <CardDescription className="text-base">
@@ -96,7 +96,7 @@ export function SignUpForm({
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-11 border-2 focus-visible:ring-orange-500 focus-visible:border-orange-500"
+                  className="h-11 border-2 focus-visible:ring-primary focus-visible:border-primary"
                 />
               </div>
               <div className="grid gap-2">
@@ -109,7 +109,7 @@ export function SignUpForm({
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="h-11 border-2 focus-visible:ring-orange-500 focus-visible:border-orange-500"
+                  className="h-11 border-2 focus-visible:ring-primary focus-visible:border-primary"
                 />
               </div>
               <div className="grid gap-2">
@@ -122,7 +122,7 @@ export function SignUpForm({
                   required
                   value={repeatPassword}
                   onChange={(e) => setRepeatPassword(e.target.value)}
-                  className="h-11 border-2 focus-visible:ring-orange-500 focus-visible:border-orange-500"
+                  className="h-11 border-2 focus-visible:ring-primary focus-visible:border-primary"
                 />
               </div>
               {error && (
@@ -134,7 +134,7 @@ export function SignUpForm({
               )}
               <Button
                 type="submit"
-                className="w-full h-12 bg-gradient-to-r from-purple-600 via-orange-500 to-red-600 hover:from-purple-700 hover:via-orange-600 hover:to-red-700 text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02]"
+                className="w-full h-12 gradient-blue-green hover:opacity-90 text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-200"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -153,21 +153,21 @@ export function SignUpForm({
           </form>
 
           {/* Features */}
-          <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <div className="mt-6 pt-6 border-t border-border">
             <div className="space-y-3 mb-6">
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/10 border border-primary/20">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                   <Trophy className="w-4 h-4 text-white" />
                 </div>
-                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <p className="text-sm font-medium text-foreground">
                   Manage unlimited sports events
                 </p>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-950/30 dark:to-blue-950/30">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center">
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-accent/10 border border-accent/20">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent flex items-center justify-center">
                   <Target className="w-4 h-4 text-white" />
                 </div>
-                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <p className="text-sm font-medium text-foreground">
                   Discover games from ESPN & more
                 </p>
               </div>
@@ -179,7 +179,7 @@ export function SignUpForm({
               </span>
               <Link
                 href="/auth/login"
-                className="font-bold bg-gradient-to-r from-purple-600 via-orange-600 to-red-600 bg-clip-text text-transparent hover:from-purple-700 hover:via-orange-700 hover:to-red-700 transition-all"
+                className="font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hover:opacity-80 transition-all"
               >
                 Login here
               </Link>

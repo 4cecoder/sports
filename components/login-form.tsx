@@ -52,20 +52,20 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       {/* Hero Section */}
       <div className="text-center space-y-3 mb-2 animate-slide-up">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 shadow-2xl shadow-orange-500/50 mb-4">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent shadow-2xl shadow-primary/50 mb-4">
           <Trophy className="w-10 h-10 text-white" />
         </div>
-        <h1 className="text-5xl font-display font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+        <h1 className="text-5xl font-display font-bold text-foreground drop-shadow-lg">
           Fastbreak
         </h1>
-        <p className="text-lg text-white/90 font-medium">
+        <p className="text-lg text-foreground/80 font-medium">
           Welcome back, champion!
         </p>
       </div>
 
-      <Card className="border-white/20 bg-white/95 dark:bg-black/80 backdrop-blur-xl shadow-2xl animate-slide-up">
+      <Card className="border-border/50 bg-card backdrop-blur-xl shadow-2xl animate-slide-up">
         <CardHeader className="text-center pb-4">
-          <CardTitle className="text-3xl font-display bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+          <CardTitle className="text-3xl font-display bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Login
           </CardTitle>
           <CardDescription className="text-base">
@@ -86,7 +86,7 @@ export function LoginForm({
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-11 border-2 focus-visible:ring-orange-500 focus-visible:border-orange-500"
+                  className="h-11 border-2 focus-visible:ring-primary focus-visible:border-primary"
                 />
               </div>
               <div className="grid gap-2">
@@ -96,7 +96,7 @@ export function LoginForm({
                   </Label>
                   <Link
                     href="/auth/forgot-password"
-                    className="ml-auto inline-block text-sm font-medium text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 transition-colors"
+                    className="ml-auto inline-block text-sm font-medium text-primary hover:text-primary/80 transition-colors"
                   >
                     Forgot password?
                   </Link>
@@ -107,7 +107,7 @@ export function LoginForm({
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="h-11 border-2 focus-visible:ring-orange-500 focus-visible:border-orange-500"
+                  className="h-11 border-2 focus-visible:ring-primary focus-visible:border-primary"
                 />
               </div>
               {error && (
@@ -119,7 +119,7 @@ export function LoginForm({
               )}
               <Button
                 type="submit"
-                className="w-full h-12 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02]"
+                className="w-full h-12 gradient-blue-green hover:opacity-90 text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-200"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -138,17 +138,17 @@ export function LoginForm({
           </form>
 
           {/* Features */}
-          <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <div className="mt-6 pt-6 border-t border-border">
             <div className="grid grid-cols-2 gap-3 mb-6">
-              <div className="text-center p-3 rounded-lg bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30">
-                <Trophy className="w-5 h-5 mx-auto mb-1 text-orange-600" />
-                <p className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+              <div className="text-center p-3 rounded-lg bg-primary/10 border border-primary/20">
+                <Trophy className="w-5 h-5 mx-auto mb-1 text-primary" />
+                <p className="text-xs font-semibold text-foreground">
                   Track Events
                 </p>
               </div>
-              <div className="text-center p-3 rounded-lg bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/30 dark:to-blue-950/30">
-                <TrendingUp className="w-5 h-5 mx-auto mb-1 text-purple-600" />
-                <p className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+              <div className="text-center p-3 rounded-lg bg-accent/10 border border-accent/20">
+                <TrendingUp className="w-5 h-5 mx-auto mb-1 text-accent" />
+                <p className="text-xs font-semibold text-foreground">
                   Discover Games
                 </p>
               </div>
@@ -160,7 +160,7 @@ export function LoginForm({
               </span>
               <Link
                 href="/auth/sign-up"
-                className="font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent hover:from-orange-700 hover:to-red-700 transition-all"
+                className="font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hover:opacity-80 transition-all"
               >
                 Sign up now
               </Link>
