@@ -92,7 +92,7 @@ interface ESPNEvent {
   name: string;
   shortName: string;
   date: string;
-  competitions: Array<{
+  competitions?: Array<{
     venue?: {
       fullName: string;
       address?: {
@@ -312,7 +312,7 @@ export default function DiscoverClient() {
             ) : (
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {events.map((event) => {
-                  const venue = event.competitions[0]?.venue;
+                  const venue = event.competitions?.[0]?.venue;
                   const isImporting = importingEventIds.has(event.id);
                   const isImported = importedEventIds.has(event.id);
 

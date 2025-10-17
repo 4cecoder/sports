@@ -20,7 +20,7 @@ interface ESPNEvent {
   name: string;
   shortName: string;
   date: string;
-  competitions: ESPNCompetition[];
+  competitions?: ESPNCompetition[];
 }
 
 interface ESPNResponse {
@@ -78,7 +78,7 @@ export async function importESPNEvent(espnEvent: ESPNEvent, sport: SportType) {
     return { success: false, error: 'User not authenticated' };
   }
 
-  const venue = espnEvent.competitions[0]?.venue;
+  const venue = espnEvent.competitions?.[0]?.venue;
 
   const eventData = {
     name: espnEvent.name,
