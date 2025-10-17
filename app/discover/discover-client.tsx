@@ -119,8 +119,12 @@ export default function DiscoverClient() {
     const result = await fetchESPNEvents(sport);
 
     if (result.success && result.data) {
-      setEvents(result.data);
-      toast.success(`Found ${result.data.length} ${sport.toUpperCase()} events`);
+      // Filter out events that might have malformed data
+      const validEvents = result.data.filter(event => {
+        return event && event.id && event.name && event.date;
+      });
+      setEvents(validEvents);
+      toast.success(`Found ${validEvents.length} ${sport.toUpperCase()} events`);
     } else {
       toast.error(result.error || 'Failed to fetch events');
     }
