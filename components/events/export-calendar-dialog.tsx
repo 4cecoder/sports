@@ -124,12 +124,12 @@ export function ExportCalendarDialog({ trigger, availableSportTypes = [] }: Expo
           {/* Sport Type Filter */}
           <div className="space-y-2">
             <Label htmlFor="sportType">Sport Type (optional)</Label>
-            <Select value={sportType} onValueChange={setSportType}>
+            <Select value={sportType || "all"} onValueChange={(value) => setSportType(value === "all" ? "" : value)}>
               <SelectTrigger>
                 <SelectValue placeholder="All sports" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All sports</SelectItem>
+                <SelectItem value="all">All sports</SelectItem>
                 {availableSportTypes.map((type) => (
                   <SelectItem key={type} value={type}>
                     {type}

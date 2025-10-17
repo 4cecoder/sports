@@ -128,13 +128,14 @@ export function DashboardClient({
                   />
                 </div>
                 <Select
-                  value={sportType}
+                  value={sportType || "all"}
                   onValueChange={(value) => {
-                    setSportType(value);
+                    const newSportType = value === "all" ? "" : value;
+                    setSportType(newSportType);
                     // Auto-trigger search when dropdown changes
                     const params = new URLSearchParams();
                     if (search) params.set('search', search);
-                    if (value) params.set('sportType', value);
+                    if (newSportType) params.set('sportType', newSportType);
                     startTransition(() => {
                       router.push(`/dashboard?${params.toString()}`);
                     });
@@ -144,7 +145,7 @@ export function DashboardClient({
                     <SelectValue placeholder="All sports" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All sports</SelectItem>
+                    <SelectItem value="all">All sports</SelectItem>
                     {availableSportTypes.map((type) => (
                       <SelectItem key={type} value={type}>
                         {type}
