@@ -1,4 +1,5 @@
 import { LoginForm } from "@/components/login-form";
+import { AuthBackground } from "@/components/auth-background";
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,10 +9,13 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <LoginForm />
+    <>
+      <AuthBackground />
+      <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+        <div className="w-full max-w-md">
+          <LoginForm />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
