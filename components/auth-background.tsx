@@ -2,9 +2,9 @@
 
 export function AuthBackground() {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-orange-500 via-red-500 to-purple-600">
-      {/* Animated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/30 via-transparent to-green-500/30 animate-pulse" />
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-teal-600">
+      {/* Animated gradient overlay matching form colors */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/40 via-transparent to-teal-500/40 animate-pulse" />
 
       {/* Diagonal stripes pattern */}
       <div
@@ -20,10 +20,10 @@ export function AuthBackground() {
         }}
       />
 
-      {/* Floating orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl animate-float-delayed" />
-      <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-green-400/20 rounded-full blur-3xl animate-float-slow" />
+      {/* Floating orbs matching primary and accent colors */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-400/30 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal-400/30 rounded-full blur-3xl animate-float-delayed" />
+      <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-cyan-400/25 rounded-full blur-3xl animate-float-slow" />
 
       {/* Grid overlay */}
       <div
