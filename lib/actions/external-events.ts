@@ -68,6 +68,31 @@ export async function fetchESPNEvents(sport: SportType) {
   }
 }
 
+export async function checkExistingImport(externalId: string, externalSource: string = 'ESPN') {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { success: false, error: 'User not authenticated' };
+  }
+
+  const { db } = await import('@/lib/db');
+  const { events } = await import('@/lib/db/schema');
+  const { and, eq } = await import('drizzle-orm');
+
+  const existingEvent = await db.query.events.findFirst({
+    where: and(
+      eq(events.userId, user.id),
+      eq(events.externalId, externalId),
+      eq(events.externalSource, externalSource)
+    ),
+  });
+
+  return { success: true, exists: !!existingEvent, eventId: existingEvent?.id };
+}
+
 export async function importESPNEvent(espnEvent: ESPNEvent, sport: SportType) {
   const supabase = await createClient();
   const {
@@ -76,6 +101,12 @@ export async function importESPNEvent(espnEvent: ESPNEvent, sport: SportType) {
 
   if (!user) {
     return { success: false, error: 'User not authenticated' };
+  }
+
+  // Check if this event is already imported
+  const duplicateCheck = await checkExistingImport(espnEvent.id, 'ESPN');
+  if (duplicateCheck.exists) {
+    return { success: false, error: 'This event has already been imported to your dashboard' };
   }
 
   const venue = espnEvent.competitions?.[0]?.venue;

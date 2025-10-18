@@ -14,7 +14,7 @@ import {
   ArrowLeft,
   Sparkles,
 } from 'lucide-react';
-import { fetchESPNEvents, importESPNEvent, type SportType } from '@/lib/actions/external-events';
+import { fetchESPNEvents, importESPNEvent, checkExistingImport, type SportType } from '@/lib/actions/external-events';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { format } from 'date-fns';
@@ -115,6 +115,7 @@ export default function DiscoverClient() {
     setSelectedSport(sport);
     setLoading(true);
     setEvents([]);
+    setImportedEventIds(new Set()); // Reset imported events
 
     const result = await fetchESPNEvents(sport);
 
@@ -124,6 +125,19 @@ export default function DiscoverClient() {
         return event && event.id && event.name && event.date;
       });
       setEvents(validEvents);
+
+      // Check which events are already imported
+      const importedIds = new Set<string>();
+      await Promise.all(
+        validEvents.map(async (event) => {
+          const check = await checkExistingImport(event.id, 'ESPN');
+          if (check.exists) {
+            importedIds.add(event.id);
+          }
+        })
+      );
+      setImportedEventIds(importedIds);
+
       toast.success(`Found ${validEvents.length} ${sport.toUpperCase()} events`);
     } else {
       toast.error(result.error || 'Failed to fetch events');
@@ -133,6 +147,12 @@ export default function DiscoverClient() {
   };
 
   const handleImportEvent = async (event: ESPNEvent, sport: SportType) => {
+    // Double-check if already imported (client-side check)
+    if (importedEventIds.has(event.id)) {
+      toast.error('This event has already been imported to your dashboard');
+      return;
+    }
+
     setImportingEventIds((prev) => new Set(prev).add(event.id));
 
     const result = await importESPNEvent(event, sport);
