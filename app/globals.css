@@ -139,6 +139,47 @@
     }
   }
 
+  /* Subtle text shimmer animation for Fastbreak title */
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--accent)) 50%,
+      hsl(var(--primary)) 100%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 0% center;
+    }
+    50% {
+      background-position: 100% center;
+    }
+    100% {
+      background-position: 0% center;
+    }
+  }
+
+  /* Subtle letter spacing animation */
+  .letter-spacing-animate {
+    animation: letterSpacing 2s ease-in-out infinite;
+  }
+
+  @keyframes letterSpacing {
+    0%, 100% {
+      letter-spacing: 0.05em;
+    }
+    50% {
+      letter-spacing: 0.15em;
+    }
+  }
+
   /* Fastbreak-inspired image hover effects */
   .image-scale-hover {
     overflow: hidden;

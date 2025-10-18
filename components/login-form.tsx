@@ -74,7 +74,7 @@ export function LoginForm({
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent shadow-2xl shadow-primary/50 mb-4">
           <Trophy className="w-10 h-10 text-white" />
         </div>
-        <h1 className="text-5xl font-display font-bold text-foreground drop-shadow-lg">
+        <h1 className="text-5xl font-display font-bold text-shimmer drop-shadow-lg">
           Fastbreak
         </h1>
         <p className="text-lg text-foreground/80 font-medium">
