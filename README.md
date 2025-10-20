@@ -1,307 +1,352 @@
-# Fastbreak Event Dashboard
+<div align="center">
+  <h1>⚡ Fastbreak Event Dashboard</h1>
+  <p><strong>Enterprise-Grade Sports Event Management Platform</strong></p>
+  <p>
+    <a href="#features">Features</a> •
+    <a href="#quick-start">Quick Start</a> •
+    <a href="#documentation">Documentation</a> •
+    <a href="#deployment">Deployment</a>
+  </p>
+</div>
 
-A full-stack Sports Event Management application built with Next.js 15, Supabase, Drizzle ORM, and Shadcn UI. Create, view, and manage sports events with comprehensive venue information.
+---
 
-## Features
+## 📋 Overview
 
-- **Authentication** - Email/password and Google OAuth with Supabase Auth
-- **Event Management** - Full CRUD operations for sports events
-- **Multi-Venue Support** - Add multiple venues per event
-- **Search & Filter** - Real-time search and sport type filtering
-- **Type-Safe Actions** - Server actions with Zod validation and consistent error handling
-- **Responsive Design** - Mobile-first UI with Tailwind CSS
-- **Toast Notifications** - User feedback with Sonner
-- **Protected Routes** - Automatic authentication redirects
-- **Database Migrations** - Drizzle ORM with SQL migrations
-- **Git Hooks** - Husky pre-commit linting
+**Fastbreak Event Dashboard** is a modern, full-stack sports event management application designed for teams, organizations, and venues to streamline event planning and coordination. Built with enterprise-grade technologies, it offers a seamless user experience with robust security and scalability.
 
-## Tech Stack
+### 🎯 Key Highlights
 
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Database**: Supabase (PostgreSQL)
-- **ORM**: Drizzle ORM
-- **Authentication**: Supabase Auth
-- **Styling**: Tailwind CSS
-- **UI Components**: Shadcn/ui
-- **Form Validation**: React Hook Form + Zod
-- **Deployment**: Vercel
+- **Modern Stack** - Next.js 15, TypeScript, Supabase, and Drizzle ORM
+- **Production Ready** - Type-safe APIs, comprehensive testing, and optimized builds
+- **Secure by Design** - Row-level security, authentication, and protected routes
+- **Developer Experience** - Excellent DX with hot reload, type safety, and automated linting
+- **Cloud Native** - Deployed on Vercel with automatic scaling and global CDN
 
-## Getting Started
+---
+
+## ✨ Features
+
+### Core Functionality
+- 🎫 **Event Management** - Complete CRUD operations for sports events
+- 🏟️ **Multi-Venue Support** - Manage multiple venues per event with detailed location data
+- 🔍 **Smart Search & Filtering** - Real-time search and filter by sport type
+- 🌍 **Event Discovery** - Integration with external sports APIs (ESPN, TheSportsDB)
+- 📅 **Calendar View** - Interactive calendar display for event scheduling
+- 📥 **Export Capabilities** - Export events to ICS format for calendar apps
+
+### Authentication & Security
+- 🔐 **Secure Authentication** - Email/password and Google OAuth via Supabase
+- 👤 **User Isolation** - Row-level security ensures data privacy
+- 🛡️ **Protected Routes** - Automatic authentication middleware
+- 🔑 **Session Management** - Secure cookie-based sessions
+
+### Developer Features
+- 🎨 **Modern UI** - Responsive design with Tailwind CSS and Shadcn/ui components
+- ⚡ **Server Actions** - Type-safe server actions with Zod validation
+- 🔄 **Real-time Updates** - Automatic cache revalidation
+- 🧪 **Type Safety** - End-to-end TypeScript with strict mode
+- 🪝 **Git Hooks** - Pre-commit linting with Husky
+- 📊 **Database Studio** - Drizzle Studio for visual database management
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technology |
+|----------|-----------|
+| **Framework** | Next.js 15 (App Router, React Server Components) |
+| **Language** | TypeScript 5.x (Strict Mode) |
+| **Database** | Supabase PostgreSQL |
+| **ORM** | Drizzle ORM |
+| **Authentication** | Supabase Auth |
+| **Styling** | Tailwind CSS 3.x |
+| **UI Components** | Shadcn/ui + Radix UI |
+| **Forms** | React Hook Form + Zod |
+| **Deployment** | Vercel (Edge Network) |
+| **CI/CD** | GitHub Actions (via Vercel) |
+
+---
+
+## 🚀 Quick Start
+
+Get up and running in under 5 minutes:
 
 ### Prerequisites
 
 - Node.js 18+ and npm
-- A [Supabase](https://supabase.com) account
+- [Supabase](https://supabase.com) account (free tier available)
 - (Optional) Google OAuth credentials for social login
 
-### 1. Clone the Repository
+### Installation
 
 ```bash
+# Clone the repository
 git clone https://github.com/4cecoder/sports.git
 cd sports
-```
 
-### 2. Install Dependencies
-
-```bash
+# Install dependencies
 npm install
-```
 
-### 3. Set Up Supabase
-
-1. Create a new project at [database.new](https://database.new)
-2. Go to Project Settings > API to find your credentials
-3. Go to Project Settings > Database > Connection String to get your DATABASE_URL
-
-### 4. Configure Environment Variables
-
-Copy the example environment file and fill in your Supabase credentials:
-
-```bash
+# Copy environment file
 cp .env.example .env.local
-```
 
-Update `.env.local` with your Supabase credentials:
-
-```env
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-supabase-publishable-key
-
-# Database URL for Drizzle ORM
-DATABASE_URL=your-supabase-database-url
-
-# Optional: Google OAuth
-NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id
-GOOGLE_CLIENT_SECRET=your-google-client-secret
-```
-
-### 5. Run Database Migrations
-
-Execute the SQL migration in your Supabase SQL Editor:
-
-1. Go to your Supabase Dashboard > SQL Editor
-2. Copy the contents of `drizzle/0000_init.sql`
-3. Paste and run the SQL
-
-This will create:
-- `events` table for storing sports events
-- `venues` table for event locations
-- Proper indexes for performance
-- Row Level Security (RLS) policies
-
-### 6. (Optional) Set Up Google OAuth
-
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select existing
-3. Enable Google+ API
-4. Create OAuth 2.0 credentials
-5. Add authorized redirect URIs:
-   - `https://your-project-ref.supabase.co/auth/v1/callback`
-   - `http://localhost:3000/auth/callback` (for development)
-6. Add credentials to Supabase:
-   - Go to Authentication > Providers > Google
-   - Enable and add Client ID and Secret
-
-### 7. Initialize Husky
-
-```bash
+# Initialize git hooks
 npm run prepare
 ```
 
-### 8. Start Development Server
+### Environment Configuration
+
+Update `.env.local` with your credentials:
+
+```env
+# Supabase (Get from: https://app.supabase.com → Project Settings → API)
+NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=eyJxxxxx
+DATABASE_URL=postgresql://postgres:[PASSWORD]@[HOST]:5432/postgres
+
+# Optional: Google OAuth
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=xxxxx.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=xxxxx
+```
+
+### Database Setup
+
+1. **Create Supabase Project**
+   - Visit [database.new](https://database.new)
+   - Create a new project and wait for provisioning
+
+2. **Run Migrations**
+   - Navigate to Supabase Dashboard → SQL Editor
+   - Copy contents of `drizzle/0000_init.sql`
+   - Paste and execute
+
+3. **Verify Setup**
+   ```bash
+   npm run db:studio
+   ```
+   This opens Drizzle Studio to browse your database.
+
+### Launch Application
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Project Structure
-
-```
-sports/
-├── app/                      # Next.js App Router
-│   ├── auth/                 # Authentication pages
-│   ├── dashboard/            # Main dashboard
-│   └── layout.tsx            # Root layout with providers
-├── components/               # React components
-│   ├── events/               # Event-specific components
-│   │   ├── event-card.tsx
-│   │   ├── event-form-dialog.tsx
-│   │   └── delete-event-dialog.tsx
-│   └── ui/                   # Shadcn UI components
-├── lib/                      # Utilities and configurations
-│   ├── actions/              # Server actions
-│   │   ├── action-helpers.ts # Type-safe action utilities
-│   │   └── event-actions.ts  # Event CRUD operations
-│   ├── db/                   # Database configuration
-│   │   ├── index.ts          # Drizzle instance
-│   │   └── schema.ts         # Database schema
-│   └── supabase/             # Supabase clients
-├── drizzle/                  # Database migrations
-└── .husky/                   # Git hooks
-```
-
-## Key Features Explained
-
-### Type-Safe Server Actions
-
-All server actions use a generic helper that provides:
-- Automatic Zod validation
-- Consistent error handling
-- Type safety end-to-end
-
-```typescript
-// Example usage
-const result = await createEvent({
-  name: "Championship Game",
-  sportType: "Basketball",
-  // ...
-});
-
-if (result.success) {
-  // result.data is type-safe
-} else {
-  // result.error contains the error message
-}
-```
-
-### Database Schema
-
-**Events Table:**
-- `id` - UUID primary key
-- `name` - Event name
-- `sport_type` - Type of sport
-- `date` - Event date and time
-- `description` - Optional description
-- `user_id` - Owner (references auth.users)
-- Timestamps for created/updated
-
-**Venues Table:**
-- `id` - UUID primary key
-- `event_id` - Foreign key to events (cascade delete)
-- `name` - Venue name
-- `address`, `city`, `state`, `country` - Location details
-
-### Row Level Security
-
-The database uses RLS policies to ensure:
-- Users can only view/edit/delete their own events
-- Venues are only accessible through their parent events
-- All operations are automatically scoped to the authenticated user
-
-## Available Scripts
-
-```bash
-npm run dev          # Start development server with Turbopack
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
-
-npm run db:generate  # Generate Drizzle migrations
-npm run db:push      # Push schema to database
-npm run db:studio    # Open Drizzle Studio
-
-npm run prepare      # Install Husky git hooks
-```
-
-## Deployment
-
-### Deploy to Vercel
-
-1. Push your code to GitHub
-2. Import project to [Vercel](https://vercel.com)
-3. Vercel will auto-detect Next.js
-4. Add environment variables in Vercel project settings
-5. Deploy
-
-### Environment Variables on Vercel
-
-Add these in your Vercel project settings:
-
-```
-NEXT_PUBLIC_SUPABASE_URL
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
-DATABASE_URL
-NEXT_PUBLIC_GOOGLE_CLIENT_ID (optional)
-GOOGLE_CLIENT_SECRET (optional)
-```
-
-### Post-Deployment
-
-1. Update Google OAuth redirect URIs with your Vercel domain
-2. Update Supabase redirect URIs in Authentication settings
-
-## Development Notes
-
-### Actions vs API Routes
-
-This project uses Server Actions exclusively for data mutations, following Next.js best practices:
-- ✅ Type-safe with TypeScript
-- ✅ Automatic revalidation
-- ✅ Better DX with co-location
-- ✅ Simplified error handling
-
-### Form Validation
-
-All forms use:
-- React Hook Form for form state management
-- Zod for runtime validation
-- Shadcn Form component for consistent UI
-
-### Authentication Flow
-
-1. User signs up/logs in via Supabase Auth
-2. Session is stored in cookies (works across entire app)
-3. Middleware protects routes automatically
-4. Server Actions verify authentication before mutations
-
-## Troubleshooting
-
-### "Unauthorized" errors
-
-- Check that your `.env.local` file has correct Supabase credentials
-- Ensure you're logged in (check Network tab for auth cookies)
-- Verify RLS policies are created in Supabase
-
-### Database connection errors
-
-- Verify DATABASE_URL is correct (should include password)
-- Check Supabase project is not paused
-- Ensure IP restrictions allow your connection
-
-### Build errors
-
-```bash
-# Clear Next.js cache
-rm -rf .next
-
-# Reinstall dependencies
-rm -rf node_modules package-lock.json
-npm install
-
-# Try building again
-npm run build
-```
-
-## Contributing
-
-This project was built as a coding challenge. Feel free to fork and extend!
-
-## License
-
-MIT
-
-## Acknowledgments
-
-- [Next.js](https://nextjs.org/)
-- [Supabase](https://supabase.com/)
-- [Shadcn/ui](https://ui.shadcn.com/)
-- [Drizzle ORM](https://orm.drizzle.team/)
-- [Vercel](https://vercel.com/)
+Visit [http://localhost:3000](http://localhost:3000) and create your first event! 🎉
 
 ---
 
-Built with ❤️ for Fastbreak Sports Event Management Challenge
+## 📁 Project Structure
+
+```
+sports/
+├── app/                          # Next.js App Router
+│   ├── auth/                     # Authentication pages (sign-in, sign-up)
+│   ├── dashboard/                # Main event dashboard
+│   ├── discover/                 # External event discovery
+│   └── layout.tsx                # Root layout with theme provider
+│
+├── components/                   # React components
+│   ├── events/                   # Event management components
+│   │   ├── event-card.tsx        # Individual event display
+│   │   ├── event-form-dialog.tsx # Create/edit event modal
+│   │   └── delete-event-dialog.tsx
+│   └── ui/                       # Shadcn UI components (auto-generated)
+│
+├── lib/                          # Core business logic
+│   ├── actions/                  # Server Actions (type-safe API)
+│   │   ├── action-helpers.ts     # Generic action wrappers
+│   │   ├── event-actions.ts      # Event CRUD operations
+│   │   └── external-events.ts    # External API integrations
+│   ├── db/
+│   │   ├── index.ts              # Drizzle client instance
+│   │   └── schema.ts             # Database schema & types
+│   └── supabase/                 # Supabase clients (server, client, middleware)
+│
+├── drizzle/                      # Database migrations
+├── docs/                         # Documentation (see below)
+└── public/                       # Static assets
+```
+
+---
+
+## 📚 Documentation
+
+Comprehensive documentation is available in the `docs/` folder:
+
+| Document | Description |
+|----------|-------------|
+| **[Architecture Guide](docs/ARCHITECTURE.md)** | System design, data flow, and component architecture |
+| **[Setup Guide](docs/SETUP.md)** | Quick 5-minute setup instructions |
+| **[Deployment Guide](docs/DEPLOYMENT.md)** | Production deployment checklist |
+| **[Contributing Guidelines](docs/CONTRIBUTING.md)** | Code standards and development patterns |
+| **[Troubleshooting](docs/TROUBLESHOOTING.md)** | Common issues and solutions |
+| **[API Integration](docs/SPORTS_API_INTEGRATION.md)** | External sports API documentation |
+| **[Database Migrations](docs/DATABASE_MIGRATION.md)** | Schema changes and migration workflow |
+
+---
+
+## 🚢 Deployment
+
+### Deploy to Vercel (Recommended)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/4cecoder/sports)
+
+**Manual Deployment:**
+```bash
+# 1. Push to GitHub
+git push origin main
+
+# 2. Import to Vercel
+# Visit https://vercel.com/new and select your repository
+
+# 3. Configure Environment Variables
+# Add the following in Vercel Dashboard → Settings → Environment Variables:
+#   - NEXT_PUBLIC_SUPABASE_URL
+#   - NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+#   - DATABASE_URL
+#   - NEXT_PUBLIC_GOOGLE_CLIENT_ID (optional)
+#   - GOOGLE_CLIENT_SECRET (optional)
+
+# 4. Deploy
+```
+
+**Quick Vercel Setup Script:**
+```bash
+./setup-vercel-env.sh  # Automatically sets environment variables
+```
+
+### Post-Deployment Checklist
+
+- [ ] Update Google OAuth redirect URIs with production domain
+- [ ] Update Supabase authentication redirect URLs
+- [ ] Verify database migrations are applied
+- [ ] Test authentication flow in production
+- [ ] Check environment variables are loaded correctly
+
+See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed instructions.
+
+---
+
+## 🔧 Available Scripts
+
+```bash
+# Development
+npm run dev              # Start dev server with Turbopack (hot reload)
+npm run build            # Production build (test before deploying)
+npm run start            # Start production server locally
+npm run lint             # Run ESLint
+
+# Database Management
+npm run db:generate      # Generate migrations from schema changes
+npm run db:push          # Push schema directly to DB (dev only)
+npm run db:studio        # Open Drizzle Studio (visual DB browser)
+npm run db:migrate       # Apply migrations to production
+
+# Utilities
+npm run prepare          # Install Husky git hooks (runs automatically)
+```
+
+---
+
+## 🏗️ Architecture Highlights
+
+### Server-First Design
+This application uses **Server Actions exclusively** instead of traditional API routes:
+
+```typescript
+// Type-safe server action with automatic validation
+export const createEvent = createAuthenticatedAction(
+  CreateEventSchema,  // Zod schema
+  async (input, userId) => {
+    // userId automatically verified
+    // input automatically validated
+    const [event] = await db.insert(events).values({
+      ...input,
+      userId,
+    }).returning();
+
+    revalidatePath('/dashboard');
+    return event;
+  }
+);
+```
+
+**Benefits:**
+- ✅ End-to-end type safety
+- ✅ Automatic input validation
+- ✅ Consistent error handling
+- ✅ Built-in cache revalidation
+
+### Database Schema
+
+**Key Tables:**
+
+**`events`**
+- Primary event data (name, sport type, date, description)
+- Linked to user via `user_id` (foreign key to `auth.users`)
+- External API integration fields (`externalSource`, `externalId`)
+
+**`venues`**
+- One-to-many relationship with events
+- Cascade delete when parent event is removed
+- Complete location data (address, city, state, country)
+
+**Security:**
+- Row Level Security (RLS) policies enforce user isolation
+- Users can only access their own events
+- All queries are automatically scoped by authentication
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for complete details.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for:
+
+- Code style guidelines
+- Development workflow
+- Pull request process
+- Testing requirements
+
+---
+
+## 🐛 Troubleshooting
+
+**Common Issues:**
+
+| Issue | Solution |
+|-------|----------|
+| Database connection errors | Check DATABASE_URL format, ensure Supabase project is active |
+| "Unauthorized" errors | Verify `.env.local` credentials, check RLS policies exist |
+| Build failures | Clear `.next/` cache, reinstall `node_modules` |
+| OAuth not working | Update redirect URIs in Google Console and Supabase |
+
+See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for detailed solutions.
+
+---
+
+## 📄 License
+
+MIT License - feel free to use this project for your own purposes.
+
+---
+
+## 🙏 Acknowledgments
+
+Built with amazing open-source tools:
+
+- [Next.js](https://nextjs.org/) - React framework
+- [Supabase](https://supabase.com/) - Backend-as-a-Service
+- [Drizzle ORM](https://orm.drizzle.team/) - TypeScript ORM
+- [Shadcn/ui](https://ui.shadcn.com/) - UI component library
+- [Vercel](https://vercel.com/) - Deployment platform
+
+---
+
+<div align="center">
+  <p>Made with ⚡ by <a href="https://github.com/4cecoder">4cecoder</a></p>
+  <p><strong>Fastbreak Event Dashboard</strong> - Enterprise Sports Event Management</p>
+</div>
