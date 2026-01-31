@@ -6,19 +6,33 @@ import { type EventWithVenues } from '@/lib/actions/event-actions';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, MapPin, Edit, Trash2, ExternalLink, Download } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Calendar, MapPin, Edit, Trash2, ExternalLink, Download, MoreVertical, Globe, Save, Repeat } from 'lucide-react';
 import { EventFormDialog } from './event-form-dialog';
 import { DeleteEventDialog } from './delete-event-dialog';
+import { PublishEventDialog } from './publish-event-dialog';
+import { EventStatusBadge } from './event-status-badge';
+import { StatusTransitionDropdown } from './status-transition-dropdown';
 import { exportSingleEvent } from '@/lib/actions/calendar-export';
+import { saveEventAsTemplate } from '@/lib/actions/template-actions';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface EventCardProps {
   event: EventWithVenues;
 }
 
 export function EventCard({ event }: EventCardProps) {
+  const router = useRouter();
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isPublishOpen, setIsPublishOpen] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
 
   const handleExportSingle = async () => {
@@ -51,6 +65,19 @@ export function EventCard({ event }: EventCardProps) {
     }
   };
 
+  const handleSaveAsTemplate = async () => {
+    const result = await saveEventAsTemplate({
+      eventId: event.id,
+      templateName: `${event.name} Template`,
+    });
+    if (result.success) {
+      toast.success('Saved as template');
+      router.refresh();
+    } else {
+      toast.error(result.error);
+    }
+  };
+
   return (
     <>
       <Card className="glow-hover group flex flex-col overflow-hidden border-border/50 transition-all duration-300 hover:border-primary/50">
@@ -60,13 +87,14 @@ export function EventCard({ event }: EventCardProps) {
               <CardTitle className="line-clamp-1 text-lg font-semibold group-hover:text-primary transition-colors">
                 {event.name}
               </CardTitle>
-              <CardDescription className="mt-2 flex items-center gap-2">
+              <CardDescription className="mt-2 flex items-center gap-2 flex-wrap">
                 <Badge
                   variant="secondary"
                   className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20"
                 >
                   {event.sportType}
                 </Badge>
+                <EventStatusBadge status={event.status} />
                 {event.externalSource && (
                   <Badge
                     variant="outline"
@@ -76,8 +104,41 @@ export function EventCard({ event }: EventCardProps) {
                     {event.externalSource}
                   </Badge>
                 )}
+                {event.recurrenceRuleId && (
+                  <Badge variant="outline" className="bg-purple-500/10 text-purple-600 border-purple-500/20 flex items-center gap-1">
+                    <Repeat className="h-3 w-3" />
+                    Series
+                  </Badge>
+                )}
               </CardDescription>
             </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                  <MoreVertical className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {event.status === 'draft' && (
+                  <DropdownMenuItem onClick={() => setIsPublishOpen(true)}>
+                    <Globe className="mr-2 h-4 w-4" /> Publish
+                  </DropdownMenuItem>
+                )}
+                {event.status === 'published' && event.slug && (
+                  <DropdownMenuItem asChild>
+                    <Link href={`/events/${event.slug}`}>
+                      <Globe className="mr-2 h-4 w-4" /> View Public Page
+                    </Link>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem onClick={handleSaveAsTemplate}>
+                  <Save className="mr-2 h-4 w-4" /> Save as Template
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleExportSingle} disabled={isExporting}>
+                  <Download className="mr-2 h-4 w-4" /> Export to Calendar
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </CardHeader>
         <CardContent className="flex-1 space-y-4">
@@ -106,7 +167,7 @@ export function EventCard({ event }: EventCardProps) {
                 <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" />
                 <span className="line-clamp-1 text-foreground">
                   {venue.name}
-                  {venue.city && <span className="text-muted-foreground"> • {venue.city}</span>}
+                  {venue.city && <span className="text-muted-foreground"> &bull; {venue.city}</span>}
                 </span>
               </div>
             ))}
@@ -118,16 +179,7 @@ export function EventCard({ event }: EventCardProps) {
           </div>
         </CardContent>
         <CardFooter className="flex gap-2 border-t border-border/50 bg-muted/20 pt-4">
-          <Button
-            variant="outline"
-            size="sm"
-            className="hover:bg-accent hover:text-accent-foreground hover:border-accent transition-all"
-            onClick={handleExportSingle}
-            disabled={isExporting}
-            title="Export to calendar"
-          >
-            <Download className="h-4 w-4" />
-          </Button>
+          <StatusTransitionDropdown eventId={event.id} currentStatus={event.status} />
           <Button
             variant="outline"
             size="sm"
@@ -140,11 +192,10 @@ export function EventCard({ event }: EventCardProps) {
           <Button
             variant="outline"
             size="sm"
-            className="flex-1 hover:bg-destructive hover:text-destructive-foreground hover:border-destructive transition-all"
+            className="hover:bg-destructive hover:text-destructive-foreground hover:border-destructive transition-all"
             onClick={() => setIsDeleteOpen(true)}
           >
-            <Trash2 className="mr-2 h-4 w-4" />
-            Delete
+            <Trash2 className="h-4 w-4" />
           </Button>
         </CardFooter>
       </Card>
@@ -159,6 +210,12 @@ export function EventCard({ event }: EventCardProps) {
       <DeleteEventDialog
         open={isDeleteOpen}
         onOpenChange={setIsDeleteOpen}
+        event={event}
+      />
+
+      <PublishEventDialog
+        open={isPublishOpen}
+        onOpenChange={setIsPublishOpen}
         event={event}
       />
     </>

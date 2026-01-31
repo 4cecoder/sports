@@ -37,6 +37,8 @@ import {
   ArrowRight,
   ArrowLeft,
   Check,
+  Users,
+  DollarSign,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -73,6 +75,12 @@ export function EventFormDialog({
         ? format(new Date(event.date), "yyyy-MM-dd'T'HH:mm")
         : '',
       description: event?.description || '',
+      capacity: event?.capacity?.toString() || '',
+      priceCents: event?.priceCents ? (event.priceCents / 100).toString() : '',
+      currency: event?.currency || 'USD',
+      registrationDeadline: event?.registrationDeadline
+        ? format(new Date(event.registrationDeadline), "yyyy-MM-dd'T'HH:mm")
+        : '',
       venues: event?.venues.map((v) => ({
         name: v.name,
         address: v.address || '',
@@ -91,10 +99,18 @@ export function EventFormDialog({
   const onSubmit = async (values: EventFormValues) => {
     setIsSubmitting(true);
 
+    const payload = {
+      ...values,
+      capacity: values.capacity ? parseInt(values.capacity) : null,
+      priceCents: values.priceCents ? Math.round(parseFloat(values.priceCents) * 100) : 0,
+      currency: values.currency || 'USD',
+      registrationDeadline: values.registrationDeadline || null,
+    };
+
     const result =
       mode === 'create'
-        ? await createEvent(values)
-        : await updateEvent({ ...values, id: event!.id });
+        ? await createEvent(payload)
+        : await updateEvent({ ...payload, id: event!.id });
 
     if (result.success) {
       toast.success(`Event ${mode === 'create' ? 'created' : 'updated'} successfully`);
@@ -113,7 +129,7 @@ export function EventFormDialog({
     let isValid = false;
 
     if (step === 1) {
-      isValid = await form.trigger(['name', 'sportType', 'date', 'description']);
+      isValid = await form.trigger(['name', 'sportType', 'date', 'description', 'capacity', 'priceCents', 'registrationDeadline']);
     } else if (step === 2) {
       isValid = await form.trigger('venues');
     }
@@ -304,6 +320,78 @@ export function EventFormDialog({
                     </FormItem>
                   )}
                 />
+
+                <Separator />
+                <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <DollarSign className="h-4 w-4 text-primary" />
+                  Ticketing (Optional)
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-3">
+                  <FormField
+                    control={form.control}
+                    name="capacity"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm flex items-center gap-1.5">
+                          <Users className="h-3.5 w-3.5" />
+                          Capacity
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            placeholder="Unlimited"
+                            className="h-11"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="priceCents"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm flex items-center gap-1.5">
+                          <DollarSign className="h-3.5 w-3.5" />
+                          Price ($)
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            placeholder="0.00 (Free)"
+                            className="h-11"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="registrationDeadline"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm">Reg. Deadline</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="datetime-local"
+                            className="h-11"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
             )}
 

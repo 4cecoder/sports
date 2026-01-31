@@ -1,6 +1,9 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { getEvents, getSportTypes } from '@/lib/actions/event-actions';
+import { getTemplates } from '@/lib/actions/template-actions';
+import { getRecurrenceRules } from '@/lib/actions/recurrence-actions';
+import { getLeagues } from '@/lib/actions/scheduling-actions';
 import { DashboardClient } from './dashboard-client';
 import type { Metadata } from 'next';
 
@@ -14,7 +17,7 @@ export const metadata: Metadata = {
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: Promise<{ search?: string; sportType?: string }>;
+  searchParams: Promise<{ search?: string; sportType?: string; status?: string }>;
 }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -24,27 +27,26 @@ export default async function DashboardPage({
   }
 
   const params = await searchParams;
-  const eventsResult = await getEvents(params);
-  const sportTypesResult = await getSportTypes();
 
-  if (!eventsResult.success) {
-    console.error('Failed to fetch events:', eventsResult.error);
-  }
-
-  if (!sportTypesResult.success) {
-    console.error('Failed to fetch sport types:', sportTypesResult.error);
-  }
-
-  const events = eventsResult.success ? eventsResult.data : [];
-  const sportTypes = sportTypesResult.success ? sportTypesResult.data : [];
+  const [eventsResult, sportTypesResult, templatesResult, recurrenceResult, leaguesResult] = await Promise.all([
+    getEvents(params),
+    getSportTypes(),
+    getTemplates(),
+    getRecurrenceRules(),
+    getLeagues(),
+  ]);
 
   return (
     <DashboardClient
-      initialEvents={events}
+      initialEvents={eventsResult.success ? eventsResult.data : []}
       user={user}
       initialSearch={params.search}
       initialSportType={params.sportType}
-      availableSportTypes={sportTypes}
+      initialStatus={params.status}
+      availableSportTypes={sportTypesResult.success ? sportTypesResult.data : []}
+      templates={templatesResult.success ? templatesResult.data : []}
+      recurrenceRules={recurrenceResult.success ? recurrenceResult.data : []}
+      leagues={leaguesResult.success ? leaguesResult.data : []}
     />
   );
 }

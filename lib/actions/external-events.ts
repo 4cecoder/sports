@@ -5,6 +5,9 @@ import { events } from '@/lib/db/schema';
 import { and, eq } from 'drizzle-orm';
 import { createClient } from '@/lib/supabase/server';
 import { createEvent } from './event-actions';
+import { sportPaths, sportDisplayNames, type SportType } from '@/lib/constants/sports';
+
+export type { SportType };
 
 interface ESPNVenue {
   fullName: string;
@@ -29,28 +32,6 @@ interface ESPNEvent {
 interface ESPNResponse {
   events: ESPNEvent[];
 }
-
-export type SportType = 'nba' | 'nfl' | 'mlb' | 'nhl' | 'mls' | 'tennis' | 'golf';
-
-const sportPaths: Record<SportType, string> = {
-  nba: 'basketball/nba',
-  nfl: 'football/nfl',
-  mlb: 'baseball/mlb',
-  nhl: 'hockey/nhl',
-  mls: 'soccer/usa.1',
-  tennis: 'tennis/atp',
-  golf: 'golf/pga',
-};
-
-const sportDisplayNames: Record<SportType, string> = {
-  nba: 'Basketball',
-  nfl: 'Football',
-  mlb: 'Baseball',
-  nhl: 'Hockey',
-  mls: 'Soccer',
-  tennis: 'Tennis',
-  golf: 'Golf',
-};
 
 export async function fetchESPNEvents(sport: SportType) {
   try {

@@ -30,12 +30,26 @@ export async function updateSession(request: NextRequest) {
   const { data } = await supabase.auth.getClaims();
   const user = data?.claims;
 
-  if (
-    request.nextUrl.pathname !== "/" &&
-    !user &&
-    !request.nextUrl.pathname.startsWith("/login") &&
-    !request.nextUrl.pathname.startsWith("/auth")
-  ) {
+  // Public routes that don't require authentication
+  const isPublicRoute =
+    request.nextUrl.pathname === "/" ||
+    request.nextUrl.pathname.startsWith("/login") ||
+    request.nextUrl.pathname.startsWith("/auth") ||
+    request.nextUrl.pathname.startsWith("/browse") ||
+    request.nextUrl.pathname.startsWith("/events/");
+
+  // Booking page requires auth — redirect to login with redirectTo
+  const isBookingRoute = /^\/events\/[^/]+\/book/.test(request.nextUrl.pathname);
+
+  if (isBookingRoute && !user) {
+    const url = request.nextUrl.clone();
+    const redirectTo = request.nextUrl.pathname + request.nextUrl.search;
+    url.pathname = "/auth/login";
+    url.searchParams.set("redirectTo", redirectTo);
+    return NextResponse.redirect(url);
+  }
+
+  if (!isPublicRoute && !user) {
     const url = request.nextUrl.clone();
     url.pathname = "/auth/login";
     return NextResponse.redirect(url);
