@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { format } from 'date-fns';
 import { type EventWithVenues, createEvent, updateEvent } from '@/lib/actions/event-actions';
+import { EventFormSchema, type EventFormValues } from '@/lib/validation/schemas';
 import {
   Dialog,
   DialogContent,
@@ -41,24 +41,6 @@ import {
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
-const venueSchema = z.object({
-  name: z.string().min(1, 'Venue name is required'),
-  address: z.string().optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  country: z.string().optional(),
-});
-
-const eventFormSchema = z.object({
-  name: z.string().min(1, 'Event name is required'),
-  sportType: z.string().min(1, 'Sport type is required'),
-  date: z.string().min(1, 'Date is required'),
-  description: z.string().optional(),
-  venues: z.array(venueSchema).min(1, 'At least one venue is required'),
-});
-
-type EventFormValues = z.infer<typeof eventFormSchema>;
-
 interface EventFormDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -83,7 +65,7 @@ export function EventFormDialog({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<EventFormValues>({
-    resolver: zodResolver(eventFormSchema),
+    resolver: zodResolver(EventFormSchema),
     defaultValues: {
       name: event?.name || '',
       sportType: event?.sportType || '',

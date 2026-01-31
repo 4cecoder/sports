@@ -3,41 +3,9 @@
 import { db } from '@/lib/db';
 import { events, venues, Event, Venue } from '@/lib/db/schema';
 import { createAuthenticatedAction, ActionResult } from './action-helpers';
-import { z } from 'zod';
+import { CreateEventSchema, UpdateEventSchema, DeleteEventSchema } from '@/lib/validation/schemas';
 import { eq, and, desc, ilike, or } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
-
-// Validation Schemas
-const VenueSchema = z.object({
-  name: z.string().min(1, 'Venue name is required'),
-  address: z.string().optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  country: z.string().optional(),
-});
-
-const CreateEventSchema = z.object({
-  name: z.string().min(1, 'Event name is required'),
-  sportType: z.string().min(1, 'Sport type is required'),
-  date: z.string().or(z.date()),
-  description: z.string().optional(),
-  venues: z.array(VenueSchema).min(1, 'At least one venue is required'),
-  externalSource: z.string().optional(),
-  externalId: z.string().optional(),
-});
-
-const UpdateEventSchema = z.object({
-  id: z.string().uuid(),
-  name: z.string().min(1, 'Event name is required'),
-  sportType: z.string().min(1, 'Sport type is required'),
-  date: z.string().or(z.date()),
-  description: z.string().optional(),
-  venues: z.array(VenueSchema).min(1, 'At least one venue is required'),
-});
-
-const DeleteEventSchema = z.object({
-  id: z.string().uuid(),
-});
 
 // Types
 export type EventWithVenues = Event & { venues: Venue[] };

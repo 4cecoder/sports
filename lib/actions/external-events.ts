@@ -1,5 +1,8 @@
 'use server';
 
+import { db } from '@/lib/db';
+import { events } from '@/lib/db/schema';
+import { and, eq } from 'drizzle-orm';
 import { createClient } from '@/lib/supabase/server';
 import { createEvent } from './event-actions';
 
@@ -53,7 +56,7 @@ export async function fetchESPNEvents(sport: SportType) {
   try {
     const response = await fetch(
       `https://site.api.espn.com/apis/site/v2/sports/${sportPaths[sport]}/scoreboard`,
-      { next: { revalidate: 3600 } } // Cache for 1 hour
+      { next: { revalidate: 3600 } }
     );
 
     if (!response.ok) {
@@ -61,26 +64,20 @@ export async function fetchESPNEvents(sport: SportType) {
     }
 
     const data = (await response.json()) as ESPNResponse;
-    return { success: true, data: data.events };
+    return { success: true as const, data: data.events };
   } catch (error) {
     console.error('ESPN API Error:', error);
-    return { success: false, error: 'Failed to fetch ESPN events' };
+    return { success: false as const, error: 'Failed to fetch ESPN events' };
   }
 }
 
 export async function checkExistingImport(externalId: string, externalSource: string = 'ESPN') {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    return { success: false, error: 'User not authenticated' };
+    return { success: false as const, error: 'User not authenticated' };
   }
-
-  const { db } = await import('@/lib/db');
-  const { events } = await import('@/lib/db/schema');
-  const { and, eq } = await import('drizzle-orm');
 
   const existingEvent = await db.query.events.findFirst({
     where: and(
@@ -90,28 +87,25 @@ export async function checkExistingImport(externalId: string, externalSource: st
     ),
   });
 
-  return { success: true, exists: !!existingEvent, eventId: existingEvent?.id };
+  return { success: true as const, exists: !!existingEvent, eventId: existingEvent?.id };
 }
 
 export async function importESPNEvent(espnEvent: ESPNEvent, sport: SportType) {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    return { success: false, error: 'User not authenticated' };
+    return { success: false as const, error: 'User not authenticated' };
   }
 
-  // Check if this event is already imported
   const duplicateCheck = await checkExistingImport(espnEvent.id, 'ESPN');
   if (duplicateCheck.exists) {
-    return { success: false, error: 'This event has already been imported to your dashboard' };
+    return { success: false as const, error: 'This event has already been imported to your dashboard' };
   }
 
   const venue = espnEvent.competitions?.[0]?.venue;
 
-  const eventData = {
+  return await createEvent({
     name: espnEvent.name,
     sportType: sportDisplayNames[sport],
     date: new Date(espnEvent.date),
@@ -137,7 +131,5 @@ export async function importESPNEvent(espnEvent: ESPNEvent, sport: SportType) {
             address: '',
           },
         ],
-  };
-
-  return await createEvent(eventData);
+  });
 }

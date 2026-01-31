@@ -16,6 +16,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Trophy, Zap, TrendingUp } from "lucide-react";
+import { useGoogleOAuth } from "@/hooks/use-google-oauth";
 
 export function LoginForm({
   className,
@@ -48,24 +49,7 @@ export function LoginForm({
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    const supabase = createClient();
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
-        },
-      });
-      if (error) throw error;
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
-      setIsLoading(false);
-    }
-  };
+  const { signInWithGoogle: handleGoogleSignIn } = useGoogleOAuth(setIsLoading, setError);
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
